@@ -8,12 +8,11 @@ type State = {
   recommendedVehicles: VehicleRaw[];
 };
 
+const adData = (window as any).adData || null;
+
 export const useHomeStore = defineStore('homeStore', {
   actions: {
     getVehicles() {
-      const adDataRaw = document.querySelector('[data-vue-selector="ad-data"]')?.innerHTML;
-      const adData = adDataRaw ? JSON.parse(adDataRaw) : {};
-
       const params = {
         ad_id: adData.id || '',
         dealer_group_id: '',
