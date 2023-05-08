@@ -1,11 +1,14 @@
 import axios from 'axios';
 import { defineStore } from 'pinia';
 
-import type { VehicleRaw } from '@/types/Vehicle';
+import type { Raw } from '@/types/Raw';
+import type { Vehicle } from '@/types/Vehicle';
+
+import { mapResults } from '@/utilities/map';
 
 type State = {
-  featuredListings: VehicleRaw[];
-  recommendedVehicles: VehicleRaw[];
+  featuredListings: Vehicle[];
+  recommendedVehicles: Vehicle[];
 };
 
 const adData = (window as any).adData || null;
@@ -28,15 +31,16 @@ export const useHomeStore = defineStore('homeStore', {
       axios
         .get(`/search-results-data/vdp-featured?${querystring}`)
         .then((response) => {
-          const vehiclesRaw: VehicleRaw[] = response.data.results;
+          const vehiclesRaw: Raw[] = response.data.results;
+          const vehicles: Vehicle[] = mapResults(vehiclesRaw);
 
-          this.setVehicles(vehiclesRaw);
+          this.setVehicles(vehicles);
         })
         .catch((error) => {
           console.error(error);
         });
     },
-    setVehicles(vehicles: VehicleRaw[]) {
+    setVehicles(vehicles: Vehicle[]) {
       this.featuredListings = vehicles;
       this.recommendedVehicles = vehicles;
     },

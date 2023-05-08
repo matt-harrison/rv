@@ -1,10 +1,13 @@
 import axios from 'axios';
 import { defineStore } from 'pinia';
 
-import type { VehicleRaw } from '@/types/Vehicle';
+import type { Raw } from '@/types/Raw';
+import type { Vehicle } from '@/types/Vehicle';
+
+import { mapResult } from '@/utilities/map';
 
 type State = {
-  vehicle?: VehicleRaw;
+  vehicle?: Vehicle;
 };
 
 const adData = (window as any).adData || null;
@@ -27,15 +30,16 @@ export const useVehicleDetailStore = defineStore('vehicleDetailStore', {
       axios
         .get(`/search-results-data/vdp-featured?${querystring}`)
         .then((response) => {
-          const vehiclesRaw: VehicleRaw[] = response.data.results;
+          const vehicleRaw: Raw[] = response.data.results;
+          const vehicle: Vehicle = mapResult(vehicleRaw[0]);
 
-          this.setVehicle(vehiclesRaw[0]);
+          this.setVehicle(vehicle);
         })
         .catch((error) => {
           console.error(error);
         });
     },
-    setVehicle(vehicle: VehicleRaw) {
+    setVehicle(vehicle: Vehicle) {
       this.vehicle = vehicle;
     },
   },
