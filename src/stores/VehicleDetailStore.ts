@@ -7,7 +7,7 @@ import type { Vehicle } from '@/types/Vehicle';
 import { mapResult } from '@/utilities/map';
 
 type State = {
-  vehicle?: Vehicle;
+  vehicle: Vehicle | undefined;
 };
 
 const adData = (window as any).adData || null;
@@ -30,8 +30,8 @@ export const useVehicleDetailStore = defineStore('vehicleDetailStore', {
       axios
         .get(`/search-results-data/vdp-featured?${querystring}`)
         .then((response) => {
-          const vehicleRaw: Raw[] = response.data.results;
-          const vehicle: Vehicle = mapResult(vehicleRaw[0]);
+          const vehiclesRaw: Raw[] = response.data.results;
+          const vehicle: Vehicle = mapResult(vehiclesRaw[0]);
 
           this.setVehicle(vehicle);
         })
