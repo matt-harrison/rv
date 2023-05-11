@@ -125,7 +125,7 @@ export type Vehicle = {
   msrp: null;
   phone: string;
   photoCount: number;
-  photoIds: String[];
+  photoIds: string[];
   price: number;
   rebate: null;
   schemeCode: string;
