@@ -23,54 +23,54 @@
 
           <div class="flex wrap gap-1 axis1-between">
             <div class="flex column gap-1">
-              <router-link
+              <RouterLink
                 class="underline-none"
                 to="#"
               >
                 About RVTrader.com
-              </router-link>
+              </RouterLink>
 
-              <router-link
+              <RouterLink
                 class="underline-none"
                 to="#"
               >
                 RVTrader.com Blog
-              </router-link>
+              </RouterLink>
 
-              <router-link
+              <RouterLink
                 class="underline-none"
                 to="#"
               >
                 Site Map
-              </router-link>
+              </RouterLink>
 
-              <router-link
+              <RouterLink
                 class="underline-none"
                 to="#"
               >
                 Need Help?
-              </router-link>
+              </RouterLink>
 
-              <router-link
+              <RouterLink
                 class="underline-none"
                 to="#"
               >
                 Email Us Feedback
-              </router-link>
+              </RouterLink>
 
-              <router-link
+              <RouterLink
                 class="underline-none"
                 to="#"
               >
                 Security Center
-              </router-link>
+              </RouterLink>
 
-              <router-link
+              <RouterLink
                 class="underline-none"
                 to="#"
               >
                 Community Guidelines
-              </router-link>
+              </RouterLink>
             </div>
           </div>
         </div>
@@ -82,61 +82,61 @@
           <h2 class="mb-1 font-18">RV Trader affiliates</h2>
 
           <div class="flex column gap-1 axis1-between">
-            <router-link
+            <RouterLink
               class="underline-none"
               to="#"
             >
               Airplanes For Sale
-            </router-link>
+            </RouterLink>
 
-            <router-link
+            <RouterLink
               class="underline-none"
               to="#"
             >
               ATVs For Sale
-            </router-link>
+            </RouterLink>
 
-            <router-link
+            <RouterLink
               class="underline-none"
               to="#"
             >
               Trucks For Sale
-            </router-link>
+            </RouterLink>
 
-            <router-link
+            <RouterLink
               class="underline-none"
               to="#"
             >
               Motorcycles For Sale
-            </router-link>
+            </RouterLink>
 
-            <router-link
+            <RouterLink
               class="underline-none"
               to="#"
             >
               Heavy Equipment For Sale
-            </router-link>
+            </RouterLink>
 
-            <router-link
+            <RouterLink
               class="underline-none"
               to="#"
             >
               Jet Skis For Sale
-            </router-link>
+            </RouterLink>
 
-            <router-link
+            <RouterLink
               class="underline-none"
               to="#"
             >
               Snowmobiles For Sale
-            </router-link>
+            </RouterLink>
 
-            <router-link
+            <RouterLink
               class="underline-none"
               to="#"
             >
               Boats For Sale
-            </router-link>
+            </RouterLink>
           </div>
         </div>
 
@@ -156,12 +156,12 @@
               </SiteButton>
 
               <p>
-                <router-link
+                <RouterLink
                   class="font-600"
                   to="#"
                 >
                   Advertise your inventory
-                </router-link>
+                </RouterLink>
                 <span> with us!</span>
               </p>
             </div>
@@ -180,12 +180,12 @@
                 Sell my RV
               </SiteButton>
 
-              <router-link
+              <RouterLink
                 class="font-600"
                 to="#"
               >
                 Edit my listing
-              </router-link>
+              </RouterLink>
             </div>
           </div>
         </div>
@@ -251,26 +251,26 @@
         class="flex wrap gap-1"
       >
         <span>RVTrader.com © 2023 Trader Interactive | All rights reserved.</span>
-        <router-link
+        <RouterLink
           class="underline-none"
           to="#"
         >
           Privacy Policy
-        </router-link>
+        </RouterLink>
 
-        <router-link
+        <RouterLink
           class="underline-none"
           to="#"
         >
           Terms of Use
-        </router-link>
+        </RouterLink>
 
-        <router-link
+        <RouterLink
           class="underline-none"
           to="#"
         >
           Advertiser Agreement
-        </router-link>
+        </RouterLink>
       </SiteContainer>
     </div>
     <slot />

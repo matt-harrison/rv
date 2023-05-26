@@ -28,7 +28,7 @@
 
 <template>
   <li class="site-carousel-card shrink-none p-1/4 snap-start xy-hidden">
-    <router-link
+    <RouterLink
       class="block p-1/2 h-full bg-white shadow-box underline-none"
       to="/listing"
     >
@@ -68,7 +68,7 @@
           />
         </div>
       </div>
-    </router-link>
+    </RouterLink>
   </li>
 </template>
 

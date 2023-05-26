@@ -297,7 +297,7 @@
         </header>
       </SiteContainer>
 
-      <section>
+      <section v-if="browseButtons">
         <SiteContainer class="mb-2">
           <section class="flex axis2-center gap-1">
             <span
@@ -688,7 +688,7 @@
             :class="isSingleColumn ? 'mx-2' : ''"
             class="flex wrap gap-1 mb-2 font-14"
           >
-            <router-link
+            <RouterLink
               :key="searchPill.label"
               :to="searchPill.url"
               class="underline-none"
@@ -702,7 +702,7 @@
               >
                 {{ searchPill.label }}
               </SiteButton>
-            </router-link>
+            </RouterLink>
           </section>
 
           <SiteDisclaimer :class="isSingleColumn ? 'mx-2 flex axis1-center' : ''" />

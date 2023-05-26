@@ -34,19 +34,19 @@
 
       <p class="font-12 font-600">
         <span>By using this site, you agree to our </span>
-        <router-link
+        <RouterLink
           class="font-700"
           to="#"
         >
           Terms of Use
-        </router-link>
+        </RouterLink>
         <span> & our </span>
-        <router-link
+        <RouterLink
           class="font-700"
           to="#"
         >
           Privacy Policy.
-        </router-link>
+        </RouterLink>
       </p>
     </div>
   </div>

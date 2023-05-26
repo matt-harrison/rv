@@ -35,7 +35,7 @@
 </script>
 
 <template>
-  <router-link
+  <RouterLink
     :target="props.target"
     :to="props.to"
     class="site-link-with-icon inline-block underline-none"
@@ -52,7 +52,7 @@
         <slot />
       </div>
     </SiteButtonStyles>
-  </router-link>
+  </RouterLink>
 </template>
 
 <style scoped>

@@ -106,26 +106,26 @@
 
     <p class="font-12">
       <span>Stay safe. Read more about </span>
-      <router-link
+      <RouterLink
         class="font-600"
         to="#"
       >
         avoiding scams and protecting your money.
-      </router-link>
+      </RouterLink>
       <span> By using this site, you agree to our </span>
-      <router-link
+      <RouterLink
         class="font-600"
         to="#"
       >
         Terms of Use
-      </router-link>
+      </RouterLink>
       <span> & our </span>
-      <router-link
+      <RouterLink
         class="font-600"
         to="#"
       >
         Privacy Policy.
-      </router-link>
+      </RouterLink>
     </p>
   </form>
 </template>

@@ -51,7 +51,7 @@
 
 <template>
   <li class="listing-card p-1/4 w-full xy-hidden">
-    <router-link
+    <RouterLink
       class="relative block h-full bg-white shadow-box underline-none"
       to="/listing"
     >
@@ -150,7 +150,7 @@
           is-secondary
         />
       </div>
-    </router-link>
+    </RouterLink>
   </li>
 </template>
 

@@ -9,12 +9,12 @@
           The information provided for each listing is supplied by the seller and/or other third parties. RVTrader.com
           is not responsible for the accuracy of the information. Please refer to the
         </span>
-        <router-link
+        <RouterLink
           class="font-600"
           to="#"
         >
           RV Trader Terms of Use
-        </router-link>
+        </RouterLink>
         <span> for further information.</span>
       </span>
     </p>

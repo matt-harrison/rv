@@ -7,13 +7,14 @@
     alt?: string;
     isLazy?: boolean;
     offset?: number;
-    src: string | undefined;
+    src?: string;
   };
 
   const props = withDefaults(defineProps<Props>(), {
     alt: '',
     isLazy: true,
     offset: 0,
+    src: undefined,
   });
 
   const siteImage = ref();
@@ -38,7 +39,7 @@
     siteImage.value.src = props.src;
   };
 
-  defineExpose(siteImage);
+  defineExpose(siteImage.value);
 
   const observer = new IntersectionObserver((entries, observer) => {
     entries.forEach(
@@ -69,9 +70,9 @@
 
 <template>
   <img
-    :alt="props.alt"
+    :alt="alt"
     ref="siteImage"
-    :src="props.isLazy && props.src ? props.src : imageDefault"
+    :src="isLazy && src ? src : imageDefault"
     class="site-image object-center object-cover"
   />
 </template>

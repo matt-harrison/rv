@@ -50,7 +50,7 @@
 </script>
 
 <template>
-  <router-link
+  <RouterLink
     :target="props.target"
     :to="props.to"
     class="site-link-as-button underline-none"
@@ -67,7 +67,7 @@
     >
       <slot />
     </SiteButtonStyles>
-  </router-link>
+  </RouterLink>
 </template>
 
 <style scoped></style>
