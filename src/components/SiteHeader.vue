@@ -48,7 +48,7 @@
       <nav
         :class="[
           isExtraSmall
-            ? 'site-header-links absolute column top-0 pt-4 px-1 pb-1 w-full h-full bg-gray-dark font-white'
+            ? 'site-header-links fixed column top-0 pt-4 px-1 pb-1 w-full h-full bg-gray-dark font-white'
             : 'row scrollbar-none snap x-auto',
           isExtraSmall && showMobileMenu ? 'left-0' : 'offscreen',
         ]"
@@ -127,7 +127,7 @@
       </nav>
     </div>
 
-    <div class="flex axis2-center gap-1">
+    <div class="flex axis2-center gap-1/2">
       <div
         class="site-header-search-bar relative"
         v-if="props.showSearchbar && !isExtraSmall"
@@ -147,7 +147,7 @@
       </div>
 
       <div
-        class="flex gap-1/4"
+        class="flex gap-1/2"
         v-if="isExtraSmall"
       >
         <SiteButtonIcon
@@ -192,6 +192,7 @@
 <style scoped>
   .site-header-links {
     transition: left var(--animate);
+    z-index: 10;
   }
 
   .site-header-links.offscreen {
