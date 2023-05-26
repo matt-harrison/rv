@@ -744,7 +744,7 @@
           <div class="mb-2">
             <h4 class="mb-1">Standard Link</h4>
 
-            <router-link to="#"> Standard link </router-link>
+            <RouterLink to="#"> Standard link </RouterLink>
           </div>
 
           <div class="mb-2">

@@ -66,6 +66,10 @@
     vehicle?.value ? `${formatTitleCase(vehicle.value.city)}, ${vehicle.value.stateCode}` : ''
   );
 
+  const yearMakeModel = computed(() =>
+    vehicle?.value ? `${vehicle.value.year} ${vehicle.value.makeName[0]} ${vehicle.value.modelName[0]}}` : ''
+  );
+
   const details: RvDetail[] = [
     {
       label: 'Type',
@@ -231,7 +235,7 @@
             class="flex axis1-between gap-2"
           >
             <div class="flex axis1-between gap-1">
-              <router-link
+              <RouterLink
                 to="/rvs-for-sale"
                 v-if="isSingleColumn"
               >
@@ -242,7 +246,7 @@
                   is-secondary
                   is-solid
                 />
-              </router-link>
+              </RouterLink>
 
               <div class="flex gap-1">
                 <SiteButtonIcon
@@ -266,7 +270,7 @@
             </div>
 
             <header>
-              <h1 class="mb-1 font-24">{{ vehicle?.year }} {{ vehicle?.makeName[0] }} {{ vehicle?.modelName[0] }}</h1>
+              <h1 class="mb-1 font-24">{{ yearMakeModel }}</h1>
 
               <div class="flex axis2-center gap-1 font-12">
                 <div
@@ -295,6 +299,7 @@
               <div class="relative">
                 <div class="flex axis1-center axis2-center">
                   <SiteImage
+                    :alt="yearMakeModel"
                     :src="thumbnail"
                     class="w-full ratio-3/2"
                   />
@@ -311,6 +316,7 @@
               >
                 <li class="relative w-1/4 ratio-3/2">
                   <SiteImage
+                    :alt="yearMakeModel"
                     :src="thumbnail"
                     class="absolute w-full h-full"
                   />
@@ -320,6 +326,7 @@
 
                 <li class="relative w-1/4 ratio-3/2">
                   <SiteImage
+                    :alt="yearMakeModel"
                     :src="thumbnail"
                     class="absolute w-full h-full"
                   />
@@ -339,6 +346,7 @@
 
                 <li class="relative w-1/4 ratio-3/2">
                   <SiteImage
+                    :alt="yearMakeModel"
                     :src="thumbnail"
                     class="absolute w-full h-full"
                   />
@@ -432,7 +440,7 @@
               <div class="font-20 font-700">{{ vehicle ? formatPrice(vehicle?.price) : '' }}</div>
 
               <div class="flex wrap gap-1/4 font-14">
-                <router-link to="#">Estimated Payment: </router-link>
+                <RouterLink to="#">Estimated Payment: </RouterLink>
 
                 <SiteLinkWithIcon
                   icon-trailing="calculator"
@@ -526,15 +534,15 @@
                       <span class="font-12 font-700">15 year trusted partner</span>
                     </div>
 
-                    <router-link
+                    <RouterLink
                       class="font-700"
                       to="/rvs-for-sale"
                       v-if="vehicle?.dealerGroupName"
                     >
                       {{ vehicle.dealerGroupName }}
-                    </router-link>
+                    </RouterLink>
 
-                    <router-link
+                    <RouterLink
                       class="font-14 font-600"
                       to="/rvs-for-sale"
                     >
@@ -543,7 +551,7 @@
                         <span>{{ cityState }}</span>
                         <span>&nbsp;{{ dummy.zip }}</span>
                       </div>
-                    </router-link>
+                    </RouterLink>
                   </div>
                 </div>
 
@@ -644,12 +652,12 @@
                     is-solid
                   />
 
-                  <router-link
+                  <RouterLink
                     class="font-14"
                     to="#"
                   >
                     Call 1-800-123-4567
-                  </router-link>
+                  </RouterLink>
                 </button>
 
                 <button class="flex axis2-center gap-1/2 shrink-none">
@@ -660,12 +668,12 @@
                     is-solid
                   />
 
-                  <router-link
+                  <RouterLink
                     class="font-14"
                     to="#"
                   >
                     Text 1-800-123-4567
-                  </router-link>
+                  </RouterLink>
                 </button>
               </div>
             </div>
@@ -795,7 +803,7 @@
       <h2 class="mb-1 font-20">Related categories</h2>
 
       <div class="flex wrap gap-1 mb-2 font-14">
-        <router-link
+        <RouterLink
           :key="searchPill.label"
           :to="searchPill.url"
           class="underline-none"
@@ -809,7 +817,7 @@
           >
             {{ searchPill.label }}
           </SiteButton>
-        </router-link>
+        </RouterLink>
       </div>
 
       <div class="flex axis1-center mb-2 border-b border-gray pb-2">

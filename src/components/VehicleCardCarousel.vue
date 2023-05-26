@@ -7,7 +7,7 @@
   type Props = {
     getIsFavorite: (adId: number) => boolean;
     handleFavoriteClick: (adId: number) => void;
-    isTouchscreen: boolean | undefined;
+    isTouchscreen?: boolean;
     offsetX?: number;
     vehicles: Vehicle[];
   };

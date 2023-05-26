@@ -35,7 +35,7 @@
     class="flex axis1-between axis2-center gap-1 border-b border-gray py-1 px-2 bg-white font-14 whitespace-nowrap"
   >
     <div class="flex axis2-center x-hidden">
-      <router-link
+      <RouterLink
         class="site-header-link shrink-none mr-1 underline-none"
         to="/"
       >
@@ -43,7 +43,7 @@
           <div class="site-header-logo mr-1/4 radius-1/2 bg-gray-dark" />
           <span class="font-32 font-700">RV Trader</span>
         </div>
-      </router-link>
+      </RouterLink>
 
       <nav
         :class="[
@@ -54,68 +54,68 @@
         ]"
         class="flex"
       >
-        <router-link
+        <RouterLink
           class="site-header-link p-1 font-700 underline-none"
           to="/"
         >
           Find RVs
-        </router-link>
+        </RouterLink>
 
-        <router-link
+        <RouterLink
           class="site-header-link p-1 font-700 underline-none"
           to="/"
         >
           Sell
-        </router-link>
+        </RouterLink>
 
-        <router-link
+        <RouterLink
           class="site-header-link p-1 font-700 underline-none"
           to="/"
         >
           Value
-        </router-link>
+        </RouterLink>
 
-        <router-link
+        <RouterLink
           class="site-header-link p-1 font-700 underline-none"
           to="/"
         >
           RV Reviews
-        </router-link>
+        </RouterLink>
 
-        <router-link
+        <RouterLink
           class="site-header-link p-1 font-700 underline-none"
           to="/"
         >
           Research
-        </router-link>
+        </RouterLink>
 
-        <router-link
+        <RouterLink
           class="site-header-link p-1 font-700 underline-none"
           to="/"
         >
           RV Dealers
-        </router-link>
+        </RouterLink>
 
-        <router-link
+        <RouterLink
           class="site-header-link p-1 font-700 underline-none"
           to="/"
         >
           Parts
-        </router-link>
+        </RouterLink>
 
-        <router-link
+        <RouterLink
           class="site-header-link p-1 font-700 underline-none"
           to="/"
         >
           RV Parks
-        </router-link>
+        </RouterLink>
 
-        <router-link
+        <RouterLink
           class="site-header-link p-1 font-700 underline-none"
           to="/"
         >
           Blog
-        </router-link>
+        </RouterLink>
 
         <SiteButtonIcon
           @click="toggleShowMobileMenu"
@@ -138,12 +138,12 @@
           type="text"
         />
 
-        <router-link
+        <RouterLink
           class="site-header-search-icon absolute flex axis1-center axis2-center radius-full p-1/2 bg-gray-light"
           to="/rvs-for-sale"
         >
           <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" />
-        </router-link>
+        </RouterLink>
       </div>
 
       <div

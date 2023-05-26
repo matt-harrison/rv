@@ -107,7 +107,6 @@
               <select
                 class="w-full bg-white font-14"
                 id="distance"
-                type="text"
               >
                 <option>Any dist.</option>
               </select>
@@ -176,13 +175,13 @@
           class="home-vehicle-type shrink-none ratio-1/1 snap-start"
           v-for="vehicleType in vehicleTypes"
         >
-          <router-link
+          <RouterLink
             class="flex column axis1-between gap-1 radius-1/2 p-1 h-full bg-gray-light underline-none"
             to="/rvs-for-sale"
           >
             <span class="font-20 font-700">{{ vehicleType.label }}</span>
             <div class="home-vehicle-type-img mx-auto radius-1/2 bg-gray" />
-          </router-link>
+          </RouterLink>
         </li>
       </SiteCarousel>
     </section>
@@ -269,7 +268,7 @@
           :class="isExtraSmall ? 'column' : 'row'"
           class="flex gap-1"
         >
-          <router-link
+          <RouterLink
             class="flex column gap-1 m-1/4 p-1/2 w-full m-w-1/2 shadow-box underline-none"
             to="#"
           >
@@ -293,10 +292,10 @@
                 Learn more
               </SiteLinkWithIcon>
             </div>
-          </router-link>
+          </RouterLink>
 
           <div class="flex column gap-1 w-full m-w-1/2">
-            <router-link
+            <RouterLink
               :class="isExtraSmall ? 'column' : 'row'"
               :key="blogPost"
               class="flex gap-1 m-1/4 p-1/2 shadow-box underline-none"
@@ -328,7 +327,7 @@
                   Learn more
                 </SiteLinkWithIcon>
               </div>
-            </router-link>
+            </RouterLink>
           </div>
         </div>
       </section>

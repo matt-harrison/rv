@@ -6,7 +6,7 @@
   type Props = {
     cardWidth: number;
     gap: number;
-    isTouchscreen: boolean | undefined;
+    isTouchscreen?: boolean;
     offsetX?: number;
   };
 
