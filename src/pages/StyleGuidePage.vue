@@ -8,6 +8,7 @@
 
   import AccordionItem from '@/components/AccordionItem.vue';
   import BasicButton from '@/components/BasicButton.vue';
+  import BasicButtonAsLink from '@/components/BasicButtonAsLink.vue';
   import BasicButtonIcon from '@/components/BasicButtonIcon.vue';
   import BasicCarousel from '@/components/BasicCarousel.vue';
   import BasicLinkAsButton from '@/components/BasicLinkAsButton.vue';
@@ -139,6 +140,10 @@
     const rgb = bgColor.match(/\d+/g);
 
     return rgb;
+  };
+
+  const handleButtonClick = () => {
+    alert('Button clicked.');
   };
 
   const toggleIsToggleActive = () => {
@@ -573,73 +578,123 @@
       <section class="mx-2 mb-2">
         <h3 class="mb-1">Button</h3>
 
-        <div class="flex wrap gap-1 mb-1 ml-1">
-          <BasicButton is-primary>Primary</BasicButton>
-          <BasicButton is-secondary>Secondary</BasicButton>
-          <BasicButton disabled>Inactive</BasicButton>
+        <div class="mb-2">
+          <h4 class="mb-1">Basic Button</h4>
+
+          <div class="flex wrap gap-1 mb-1 ml-1">
+            <BasicButton
+              @click="handleButtonClick"
+              is-primary
+            >
+              Primary
+            </BasicButton>
+
+            <BasicButton
+              @click="handleButtonClick"
+              is-secondary
+            >
+              Secondary
+            </BasicButton>
+
+            <BasicButton
+              @click="handleButtonClick"
+              disabled
+            >
+              Inactive
+            </BasicButton>
+          </div>
+
+          <div class="flex wrap gap-1 ml-1">
+            <BasicButton
+              @click="handleButtonClick"
+              icon-leading="star"
+              is-primary
+              is-solid
+            >
+              Leading Icon
+            </BasicButton>
+
+            <BasicButton
+              @click="handleButtonClick"
+              icon-trailing="up-right-from-square"
+              is-secondary
+              is-solid
+            >
+              Trailing Icon
+            </BasicButton>
+
+            <BasicButton disabled>No Icon</BasicButton>
+          </div>
         </div>
 
-        <div class="flex wrap gap-1 ml-1">
-          <BasicButton
-            icon-leading="star"
-            is-primary
-            is-solid
-          >
-            Leading Icon
-          </BasicButton>
+        <div class="mb-2">
+          <h4 class="mb-1">Button As Link</h4>
 
-          <BasicButton
-            icon-trailing="up-right-from-square"
-            is-secondary
-            is-solid
-          >
-            Trailing Icon
-          </BasicButton>
+          <div class="flex wrap gap-1 ml-1">
+            <BasicButtonAsLink
+              @click="handleButtonClick"
+              icon-leading="star"
+              is-solid
+            >
+              Leading Icon
+            </BasicButtonAsLink>
 
-          <BasicButton disabled>No Icon</BasicButton>
-        </div>
-      </section>
+            <BasicButtonAsLink
+              @click="handleButtonClick"
+              icon-trailing="up-right-from-square"
+              is-solid
+            >
+              Trailing Icon
+            </BasicButtonAsLink>
 
-      <section class="mx-2 mb-2">
-        <h3 class="mb-1">Button Icon</h3>
-
-        <div class="flex wrap gap-1 mb-1 ml-1">
-          <BasicButtonIcon
-            :icon="icon"
-            :key="icon"
-            :title="icon"
-            class="site-icon-demo border-2 border-gray-dark"
-            is-primary
-            is-restyled
-            is-solid
-            v-for="icon in icons"
-          />
+            <BasicButtonAsLink @click="handleButtonClick">No Icon</BasicButtonAsLink>
+          </div>
         </div>
 
-        <div class="flex wrap gap-1 mb-1 ml-1">
-          <BasicButtonIcon
-            :icon="icon"
-            :key="icon"
-            :title="icon"
-            class="site-icon-demo border-2 border-gray-dark"
-            is-restyled
-            is-secondary
-            is-solid
-            v-for="icon in icons"
-          />
-        </div>
+        <div class="mb-2">
+          <h4 class="mb-1">Button Icon</h4>
 
-        <div class="flex wrap gap-1 ml-1">
-          <BasicButtonIcon
-            :icon="icon"
-            :key="icon"
-            :title="icon"
-            class="site-icon-demo"
-            is-restyled
-            is-secondary
-            is-solid
-            v-for="icon in icons"
-          />
+          <div class="flex wrap gap-1 mb-1 ml-1">
+            <BasicButtonIcon
+              :icon="icon"
+              :key="icon"
+              :title="icon"
+              @click="handleButtonClick"
+              class="site-icon-demo border-2 border-gray-dark"
+              is-primary
+              is-restyled
+              is-solid
+              v-for="icon in icons"
+            />
+          </div>
+
+          <div class="flex wrap gap-1 mb-1 ml-1">
+            <BasicButtonIcon
+              :icon="icon"
+              :key="icon"
+              :title="icon"
+              @click="handleButtonClick"
+              class="site-icon-demo border-2 border-gray-dark"
+              is-restyled
+              is-secondary
+              is-solid
+              v-for="icon in icons"
+            />
+          </div>
+
+          <div class="flex wrap gap-1 ml-1">
+            <BasicButtonIcon
+              :icon="icon"
+              :key="icon"
+              :title="icon"
+              @click="handleButtonClick"
+              class="site-icon-demo"
+              is-restyled
+              is-secondary
+              is-solid
+              v-for="icon in icons"
+            />
+          </div>
         </div>
       </section>
 
@@ -729,80 +784,80 @@
       <section class="mx-2 mb-2">
         <h3 class="mb-1">Link</h3>
 
-        <div class="ml-1">
-          <div class="mb-2">
-            <h4 class="mb-1">Standard Link</h4>
+        <div class="mb-2">
+          <h4 class="mb-1">Basic Link</h4>
 
-            <RouterLink to="#"> Standard link </RouterLink>
+          <div class="ml-1">
+            <RouterLink to="#">Standard link</RouterLink>
+          </div>
+        </div>
+
+        <div class="mb-2">
+          <h4 class="mb-1">Link with Icon</h4>
+
+          <div class="flex wrap gap-2 ml-1">
+            <BasicLinkWithIcon
+              icon-leading="star"
+              is-solid
+              to="#"
+            >
+              Leading Icon
+            </BasicLinkWithIcon>
+
+            <BasicLinkWithIcon
+              icon-trailing="up-right-from-square"
+              is-solid
+              to="#"
+            >
+              Trailing Icon
+            </BasicLinkWithIcon>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="mb-1">Link as Button</h4>
+
+          <div class="flex wrap gap-1 mb-1 ml-1">
+            <BasicLinkAsButton
+              is-primary
+              to="#"
+            >
+              Primary
+            </BasicLinkAsButton>
+
+            <BasicLinkAsButton
+              is-secondary
+              to="#"
+            >
+              Secondary
+            </BasicLinkAsButton>
           </div>
 
-          <div class="mb-2">
-            <h4 class="mb-1">Link with Icon</h4>
+          <div class="flex wrap gap-1 ml-1">
+            <BasicLinkAsButton
+              icon-leading="star"
+              is-primary
+              is-solid
+              to="#"
+            >
+              Leading Icon
+            </BasicLinkAsButton>
 
-            <div class="flex wrap gap-2">
-              <BasicLinkWithIcon
-                icon-leading="star"
-                is-solid
-                to="#"
-              >
-                Leading Icon
-              </BasicLinkWithIcon>
+            <BasicLinkAsButton
+              icon-trailing="up-right-from-square"
+              is-secondary
+              is-solid
+              to="#"
+            >
+              Trailing Icon
+            </BasicLinkAsButton>
 
-              <BasicLinkWithIcon
-                icon-trailing="up-right-from-square"
-                is-solid
-                to="#"
-              >
-                Trailing Icon
-              </BasicLinkWithIcon>
-            </div>
-          </div>
-
-          <div>
-            <h4 class="mb-1">Link as Button</h4>
-
-            <div class="flex wrap gap-1 mb-1">
-              <BasicLinkAsButton
-                is-primary
-                to="#"
-              >
-                Primary
-              </BasicLinkAsButton>
-
-              <BasicLinkAsButton
-                is-secondary
-                to="#"
-              >
-                Secondary
-              </BasicLinkAsButton>
-            </div>
-
-            <div class="flex wrap gap-1">
-              <BasicLinkAsButton
-                icon-leading="star"
-                is-primary
-                is-solid
-                to="#"
-              >
-                Leading Icon
-              </BasicLinkAsButton>
-
-              <BasicLinkAsButton
-                icon-trailing="up-right-from-square"
-                is-secondary
-                is-solid
-                to="#"
-              >
-                Trailing Icon
-              </BasicLinkAsButton>
-
-              <BasicLinkAsButton
-                is-secondary
-                to="#"
-              >
-                No Icon
-              </BasicLinkAsButton>
-            </div>
+            <BasicLinkAsButton
+              is-secondary
+              to="#"
+            >
+              No Icon
+            </BasicLinkAsButton>
           </div>
         </div>
       </section>
@@ -843,8 +898,8 @@
 
 <style>
   .site-icon-demo {
-    width: 36px;
-    height: 36px;
+    width: 2rem;
+    height: 2rem;
   }
 
   .site-carousel-card-demo {

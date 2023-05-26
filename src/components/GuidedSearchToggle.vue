@@ -21,7 +21,7 @@
     <div class="flex axis1-center axis2-center gap-1/4">
       <span class="font-12 font-700 whitespace-nowrap">{{ props.vehicleType.label }}</span>
       <FontAwesomeIcon
-        class="guided-search-toggle-check"
+        class="font-16"
         icon="fa-solid fa-check"
         v-if="props.isActive"
       />
@@ -32,11 +32,6 @@
 <style scoped>
   .guided-search-toggle {
     width: 125px;
-  }
-
-  .guided-search-toggle-check {
-    width: 15px;
-    height: 15px;
   }
 
   .guided-search-toggle-thumb {

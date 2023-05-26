@@ -289,6 +289,6 @@
 
 <style>
   .site-footer-social {
-    width: 36px;
+    width: 2rem;
   }
 </style>
