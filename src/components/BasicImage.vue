@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  import { onMounted, onBeforeUnmount, ref, withDefaults } from 'vue';
+  import { onMounted, onBeforeUnmount, ref } from 'vue';
 
   import { cdnDomain } from '@/config/rv.config';
 
@@ -73,7 +73,7 @@
     :alt="alt"
     ref="siteImage"
     :src="isLazy && src ? src : imageDefault"
-    class="site-image object-center object-cover"
+    class="basic-image object-center object-cover"
   />
 </template>
 

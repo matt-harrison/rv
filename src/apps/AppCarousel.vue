@@ -1,7 +1,7 @@
 <script lang="ts" setup>
   import { onMounted, onUnmounted } from 'vue';
 
-  import VehicleCardCarousel from '@/components/VehicleCardCarousel.vue';
+  import CardCarouselFeaturedListing from '@/components/CardCarouselFeaturedListing.vue';
 
   import { useBreakpointStore } from '@/stores/BreakpointStore';
   import { useFavoriteStore } from '@/stores/FavoriteStore';
@@ -26,7 +26,7 @@
 </script>
 
 <template>
-  <VehicleCardCarousel
+  <CardCarouselFeaturedListing
     :get-is-favorite="favoriteStore.getIsFavorite"
     :handle-favorite-click="favoriteStore.toggleIsFavorite"
     :is-touchscreen="userAgentStore.isTouchscreen"

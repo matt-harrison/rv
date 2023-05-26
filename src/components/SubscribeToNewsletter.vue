@@ -1,7 +1,7 @@
 <script lang="ts" setup>
   import { storeToRefs } from 'pinia';
 
-  import SiteButton from '@/components/SiteButton.vue';
+  import BasicButton from '@/components/BasicButton.vue';
   import { useBreakpointStore } from '@/stores/BreakpointStore';
 
   const breakpointStore = useBreakpointStore();
@@ -24,12 +24,12 @@
           type="text"
         />
 
-        <SiteButton
+        <BasicButton
           class="px-2"
           is-primary
         >
           Submit
-        </SiteButton>
+        </BasicButton>
       </div>
 
       <p class="font-12 font-600">

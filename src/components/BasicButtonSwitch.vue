@@ -19,7 +19,7 @@
       :class="button.isActive ? 'bg-white' : 'border-gray-light bg-gray-light'"
       :key="button.label"
       @click="button.callback"
-      class="switch-button border-1 border-gray radius-1/4 py-1/2 px-2 w-full font-14 font-600 whitespace-nowrap"
+      class="basic-button-switch border-1 border-gray radius-1/4 py-1/2 px-2 w-full font-14 font-600 whitespace-nowrap"
       v-for="button in props.buttons"
     >
       <span>{{ button.label }} </span>
@@ -29,7 +29,7 @@
 </template>
 
 <style scoped>
-  .switch-button {
+  .basic-button-switch {
     flex: 1;
     transition: background-color var(--animate), border-color var(--animate);
   }

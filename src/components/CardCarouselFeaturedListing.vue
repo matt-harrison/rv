@@ -1,8 +1,8 @@
 <script lang="ts" setup>
   import type { Vehicle } from '@/types/Vehicle';
 
-  import SiteCarousel from '@/components/SiteCarousel.vue';
-  import VehicleCard from '@/components/VehicleCard.vue';
+  import BasicCarousel from '@/components/BasicCarousel.vue';
+  import CardFeaturedListing from '@/components/CardFeaturedListing.vue';
 
   type Props = {
     getIsFavorite: (adId: number) => boolean;
@@ -18,21 +18,21 @@
 </script>
 
 <template>
-  <SiteCarousel
+  <BasicCarousel
     :card-width="208"
     :gap="16"
     :is-touchscreen="props.isTouchscreen"
     :offset-x="offsetX"
-    class="vehicle-card-carousel"
+    class="featured-listing-card-carousel"
   >
-    <VehicleCard
+    <CardFeaturedListing
       :is-favorite="props.getIsFavorite(vehicle.adId)"
       :key="vehicle.adId"
       :vehicle="vehicle"
       @handle-favorite-click="props.handleFavoriteClick"
       v-for="vehicle in props.vehicles"
     />
-  </SiteCarousel>
+  </BasicCarousel>
 </template>
 
 <style scoped></style>

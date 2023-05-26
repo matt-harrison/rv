@@ -5,9 +5,8 @@
 
   import type { Vehicle } from '@/types/Vehicle';
 
-  import SiteButtonIcon from '@/components/SiteButtonIcon.vue';
-  import SiteIconToggle from '@/components/SiteIconToggle.vue';
-  import SiteImage from '@/components/SiteImage.vue';
+  import BasicButtonIcon from '@/components/BasicButtonIcon.vue';
+  import BasicImage from '@/components/BasicImage.vue';
   import { cdnDomain, cdnVersion } from '@/config/rv.config';
   import { formatPhone, formatPrice, formatTitleCase } from '@/utilities/format';
 
@@ -50,14 +49,14 @@
 </script>
 
 <template>
-  <li class="listing-card p-1/4 w-full xy-hidden">
+  <li class="card-listing p-1/4 w-full xy-hidden">
     <RouterLink
       class="relative block h-full bg-white shadow-box underline-none"
       to="/listing"
     >
       <div class="flex column axis1-between gap-1/2 p-1/2 h-full">
         <div class="flex column gap-1/2">
-          <SiteImage
+          <BasicImage
             :offset="200"
             :src="thumbnail"
             assume-horizontal
@@ -94,7 +93,7 @@
             v-if="props.vehicle.phone"
           >
             <div class="flex axis2-center gap-1/4">
-              <SiteButtonIcon
+              <BasicButtonIcon
                 class="p-1/2"
                 icon="phone"
                 is-secondary
@@ -115,11 +114,11 @@
                 href="tel:+{{ props.vehicle.phone }}"
                 v-if="showPhone || !dummy.hasHiddenPhone"
               >
-                Call {{ formatPhone(parseInt(props.vehicle.phone)) }}
+                Call {{ formatPhone(parseInt(props.vehicle.phone, 10)) }}
               </a>
             </div>
 
-            <SiteButtonIcon
+            <BasicButtonIcon
               class="p-1/2"
               icon="envelope"
               is-primary
@@ -130,7 +129,7 @@
       </div>
 
       <div
-        class="listing-card-label absolute top-0 flex mt-1"
+        class="card-listing-label absolute top-0 flex mt-1"
         v-if="dummy.label"
       >
         <div class="flex gap-1/2 p-1/2 bg-white">
@@ -138,13 +137,13 @@
           <span class="font-12 font-600">{{ dummy.label }}</span>
         </div>
 
-        <div class="listing-card-label-flag" />
+        <div class="card-listing-label-flag" />
       </div>
       <div class="absolute top-0 right-0 mt-1 mr-1">
-        <SiteIconToggle
+        <BasicButtonIcon
           :is-solid="isFavorite"
           @click.prevent="handleFavoriteClick"
-          class-button="p-1/2 font-18"
+          class="p-1/2 font-18"
           icon="heart"
           is-restyled
           is-secondary
@@ -155,11 +154,11 @@
 </template>
 
 <style scoped>
-  .listing-card-label {
+  .card-listing-label {
     filter: drop-shadow(var(--shadow));
   }
 
-  .listing-card-label-flag {
+  .card-listing-label-flag {
     border-top: 16px solid white;
     border-right: 8px solid transparent;
     border-bottom: 16px solid transparent;
@@ -167,7 +166,7 @@
   }
 
   @media (min-width: 992px) {
-    .listing-card {
+    .card-listing {
       max-width: calc(33.3333% - (2rem / 3));
     }
   }

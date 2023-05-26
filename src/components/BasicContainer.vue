@@ -11,7 +11,7 @@
 <template>
   <div
     :class="isLarge ? 'mx-auto' : 'mx-2'"
-    class="w-container"
+    class="basic-container w-container"
   >
     <slot />
   </div>

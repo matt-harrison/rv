@@ -4,13 +4,13 @@
   import type { VehicleType } from '@/types/VehicleType';
 
   import AdPlaceholder from '@/components/AdPlaceholder.vue';
+  import BasicButton from '@/components/BasicButton.vue';
+  import BasicCarousel from '@/components/BasicCarousel.vue';
+  import BasicContainer from '@/components/BasicContainer.vue';
+  import BasicLinkAsButton from '@/components/BasicLinkAsButton.vue';
+  import BasicLinkWithIcon from '@/components/BasicLinkWithIcon.vue';
+  import CardCarouselFeaturedListing from '@/components/CardCarouselFeaturedListing.vue';
   import SeoContent from '@/components/SeoContent.vue';
-  import SiteButton from '@/components/SiteButton.vue';
-  import SiteCarousel from '@/components/SiteCarousel.vue';
-  import SiteContainer from '@/components/SiteContainer.vue';
-  import SiteLinkAsButton from '@/components/SiteLinkAsButton.vue';
-  import SiteLinkWithIcon from '@/components/SiteLinkWithIcon.vue';
-  import VehicleCardCarousel from '@/components/VehicleCardCarousel.vue';
   import { formatNumber } from '@/utilities/format';
   import { useBreakpointStore } from '@/stores/BreakpointStore';
   import { useFavoriteStore } from '@/stores/FavoriteStore';
@@ -49,7 +49,7 @@
 
 <template>
   <div class="home-page mb-2">
-    <SiteContainer
+    <BasicContainer
       :class="isExtraSmall ? 'column' : 'row'"
       class="flex axis1-center gap-2 mt-2 mx-2 mb-4"
     >
@@ -130,7 +130,7 @@
           </div>
         </fieldset>
 
-        <SiteLinkAsButton
+        <BasicLinkAsButton
           class="mb-1 radius-1/2 p-1 w-full"
           icon-leading="magnifying-glass"
           is-primary
@@ -138,16 +138,16 @@
           to="/rvs-for-sale"
         >
           Search
-        </SiteLinkAsButton>
+        </BasicLinkAsButton>
       </form>
 
       <div class="home-alpha-dma-ad flex axis1-center axis2-center radius-1/2 w-full bg-gray-light font-gray font-700">
         Alpha-DMA
       </div>
-    </SiteContainer>
+    </BasicContainer>
 
     <section class="mb-4">
-      <SiteContainer
+      <BasicContainer
         :class="isExtraSmall ? 'column' : 'row'"
         class="flex axis1-center axis2-center mb-4 gap-1"
       >
@@ -161,9 +161,9 @@
         </h2>
 
         <p>Whether you're looking for something drivable or towable, we have the RV type for you.</p>
-      </SiteContainer>
+      </BasicContainer>
 
-      <SiteCarousel
+      <BasicCarousel
         :card-width="280"
         :gap="16"
         :is-touchscreen="isTouchscreen"
@@ -183,10 +183,10 @@
             <div class="home-vehicle-type-img mx-auto radius-1/2 bg-gray" />
           </RouterLink>
         </li>
-      </SiteCarousel>
+      </BasicCarousel>
     </section>
 
-    <SiteContainer class="mb-4">
+    <BasicContainer class="mb-4">
       <section
         :class="isExtraSmall ? 'column p-2' : 'row p-4'"
         class="home-sell-your-vehicle flex gap-2 mb-4 radius-1/2 bg-gray-light y-hidden"
@@ -197,12 +197,12 @@
         >
           <h2 class="font-32">Sell your RV on RV Trader</h2>
           <p>Millions of buyers are looking for their next RV on RV Trader this month.</p>
-          <SiteButton
+          <BasicButton
             class="px-4 whitespace-nowrap"
             is-primary
           >
             Sell my RV
-          </SiteButton>
+          </BasicButton>
         </div>
 
         <div
@@ -220,15 +220,15 @@
       >
         Native summit showcase banner
       </AdPlaceholder>
-    </SiteContainer>
+    </BasicContainer>
 
     <section class="mr-2 mb-4">
-      <SiteContainer>
+      <BasicContainer>
         <h2 class="mb-1 font-24">Featured listings</h2>
-      </SiteContainer>
+      </BasicContainer>
 
       <div class="flex gap-2">
-        <VehicleCardCarousel
+        <CardCarouselFeaturedListing
           :get-is-favorite="favoriteStore.getIsFavorite"
           :handle-favorite-click="favoriteStore.toggleIsFavorite"
           :is-touchscreen="isTouchscreen"
@@ -247,11 +247,11 @@
     </section>
 
     <section class="mb-4">
-      <SiteContainer>
+      <BasicContainer>
         <h2 class="mb-1 font-24">Recommended RVs</h2>
-      </SiteContainer>
+      </BasicContainer>
 
-      <VehicleCardCarousel
+      <CardCarouselFeaturedListing
         :get-is-favorite="favoriteStore.getIsFavorite"
         :handle-favorite-click="favoriteStore.toggleIsFavorite"
         :is-touchscreen="isTouchscreen"
@@ -260,7 +260,7 @@
       />
     </section>
 
-    <SiteContainer>
+    <BasicContainer>
       <section class="mb-4">
         <h2 class="mb-1 font-32">Fresh from the blog</h2>
 
@@ -283,14 +283,14 @@
                 cum esse.
               </p>
 
-              <SiteLinkWithIcon
+              <BasicLinkWithIcon
                 class="font-14 font-700"
                 icon-trailing="chevron-right"
                 is-solid
                 to="#"
               >
                 Learn more
-              </SiteLinkWithIcon>
+              </BasicLinkWithIcon>
             </div>
           </RouterLink>
 
@@ -309,23 +309,21 @@
 
               <div class="flex column gap-1/2">
                 <span class="font-12 font-600">Blog date {{ blogPost }}</span>
-
                 <h3 class="font-20">Blog headline {{ blogPost }}</h3>
-
                 <p class="home-blog-preview y-hidden font-14">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda aperiam iure officia, nostrum
                   labore qui eligendi! Incidunt, obcaecati adipisci. Quibusdam doloribus at minus culpa autem eaque
                   odit. Earum, cum esse.
                 </p>
 
-                <SiteLinkWithIcon
+                <BasicLinkWithIcon
                   class="font-14 font-700"
                   icon-trailing="chevron-right"
                   is-solid
                   to="#"
                 >
                   Learn more
-                </SiteLinkWithIcon>
+                </BasicLinkWithIcon>
               </div>
             </RouterLink>
           </div>
@@ -418,7 +416,7 @@
           </ul>
         </li>
       </SeoContent>
-    </SiteContainer>
+    </BasicContainer>
   </div>
 </template>
 

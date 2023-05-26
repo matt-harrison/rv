@@ -2,27 +2,24 @@
   import { computed, onMounted, ref } from 'vue';
   import { storeToRefs } from 'pinia';
 
-  import type { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-
   import type { BreadCrumb } from '@/types/BreadCrumb';
   import type { VehicleType } from '@/types/VehicleType';
 
   import AccordionItem from '@/components/AccordionItem.vue';
   import AdPlaceholder from '@/components/AdPlaceholder.vue';
+  import BasicButton from '@/components/BasicButton.vue';
+  import BasicButtonIcon from '@/components/BasicButtonIcon.vue';
+  import BasicButtonSwitch from '@/components/BasicButtonSwitch.vue';
+  import BasicCarousel from '@/components/BasicCarousel.vue';
+  import BasicContainer from '@/components/BasicContainer.vue';
+  import BasicToggle from '@/components/BasicToggle.vue';
   import BreadCrumbs from '@/components/BreadCrumbs.vue';
-  import ListingCard from '@/components/ListingCard.vue';
+  import CardCarouselFeaturedListing from '@/components/CardCarouselFeaturedListing.vue';
+  import CardListing from '@/components/CardListing.vue';
+  import GuidedSearchToggle from '@/components/GuidedSearchToggle.vue';
   import SeoContent from '@/components/SeoContent.vue';
-  import SiteButton from '@/components/SiteButton.vue';
-  import SiteButtonIcon from '@/components/SiteButtonIcon.vue';
-  import SiteButtonToggle from '@/components/SiteButtonToggle.vue';
-  import SiteCarousel from '@/components/SiteCarousel.vue';
-  import SiteContainer from '@/components/SiteContainer.vue';
   import SiteDisclaimer from '@/components/SiteDisclaimer.vue';
-  import SiteIconToggle from '@/components/SiteIconToggle.vue';
-  import SiteSwitchButtons from '@/components/SiteSwitchButtons.vue';
   import SubscribeToNewsletter from '@/components/SubscribeToNewsletter.vue';
-  import VehicleCardCarousel from '@/components/VehicleCardCarousel.vue';
-  import VehicleToggle from '@/components/VehicleToggle.vue';
   import { formatNumber } from '@/utilities/format';
   import { useBreakpointStore } from '@/stores/BreakpointStore';
   import { useFavoriteStore } from '@/stores/FavoriteStore';
@@ -223,7 +220,7 @@
       :class="isSingleColumn ? 'column' : 'column-reverse'"
       class="flex gap-2 mb-2"
     >
-      <SiteContainer :class="isLarge ? 'w-full' : ''">
+      <BasicContainer :class="isLarge ? 'w-full' : ''">
         <BreadCrumbs
           :bread-crumbs="breadCrumbs"
           class="mb-1"
@@ -240,15 +237,17 @@
             :class="isSingleColumn ? 'axis1-between w-full' : ''"
             class="flex wrap axis2-center gap-1"
           >
-            <div class="relative">
-              <SiteButton
+            <div
+              class="relative"
+              v-if="isSingleColumn"
+            >
+              <BasicButton
                 class="border-2 border-dark-gray radius-1/4 py-1/2 px-1"
                 is-primary
                 is-restyled
-                v-if="isSingleColumn"
               >
                 Filters
-              </SiteButton>
+              </BasicButton>
 
               <div
                 class="search-results-filter-count absolute top-0 right-0 flex axis1-center axis2-center radius-full bg-gray-light font-14 font-700 ratio-1/1"
@@ -260,12 +259,12 @@
 
             <div class="flex gap-1">
               <button class="flex axis2-center gap-1/4">
-                <SiteIconToggle
+                <BasicButtonIcon
                   :class="isSingleColumn ? 'border-2 border-dark-gray p-1/2' : 'p-1/4'"
                   :is-active="isSavedSearch"
                   :is-solid="isSavedSearch"
                   @click="toggleIsSavedSearch"
-                  class-button="icon-button"
+                  class="icon-button"
                   icon="heart"
                   is-restyled
                   is-secondary
@@ -273,32 +272,30 @@
                 <span v-if="!isSingleColumn">Save search</span>
               </button>
 
-              <SiteButton
-                :class="isSingleColumn ? 'border-2 border-dark-gray radius-1/4 py-1/2 px-1' : ''"
+              <BasicButton
+                :class="isSingleColumn ? 'border-2 border-dark-gray radius-1/4 py-1/2 px-1' : 'p-1/4'"
+                :icon-trailing="isSingleColumn ? '' : 'chevron-down'"
                 :is-secondary="isSingleColumn"
-                class="flex axis2-center gap-1/4 p-1/4"
+                class="flex axis2-center gap-1/4"
+                icon-leading="arrow-right-arrow-left"
                 is-restyled
+                is-solid
               >
-                <FontAwesomeIcon
-                  class="rotate-90"
-                  icon="fa-solid fa-arrow-right-arrow-left"
-                />
                 <span>Sort by{{ !isSingleColumn ? ':' : '' }}</span>
                 <span
                   class="flex gap-1/4"
                   v-if="!isSingleColumn"
                 >
-                  <span>Premium</span>
-                  <FontAwesomeIcon icon="fa-solid fa-chevron-down" />
+                  Premium
                 </span>
-              </SiteButton>
+              </BasicButton>
             </div>
           </div>
         </header>
-      </SiteContainer>
+      </BasicContainer>
 
       <section v-if="browseButtons">
-        <SiteContainer class="mb-2">
+        <BasicContainer class="mb-2">
           <section class="flex axis2-center gap-1">
             <span
               class="font-20 font-700"
@@ -307,14 +304,14 @@
               Browse
             </span>
 
-            <SiteSwitchButtons
+            <BasicButtonSwitch
               :buttons="browseButtons"
               :class="isSingleColumn ? 'w-full' : ''"
             />
           </section>
-        </SiteContainer>
+        </BasicContainer>
 
-        <SiteCarousel
+        <BasicCarousel
           :card-width="125"
           :gap="16"
           :is-touchscreen="isTouchscreen"
@@ -322,16 +319,16 @@
           class="axis1-center"
           v-if="isBrowseByType"
         >
-          <VehicleToggle
+          <GuidedSearchToggle
             :is-active="types.includes(vehicleType.label)"
             :key="vehicleType.label"
             :vehicle-type="vehicleType"
             @click="handleTypeToggleClick(vehicleType.label)"
             v-for="vehicleType in dummyVehicleMakes"
           />
-        </SiteCarousel>
+        </BasicCarousel>
 
-        <SiteCarousel
+        <BasicCarousel
           :card-width="125"
           :gap="16"
           :is-touchscreen="isTouchscreen"
@@ -339,14 +336,14 @@
           class="axis1-center"
           v-if="!isBrowseByType"
         >
-          <VehicleToggle
+          <GuidedSearchToggle
             :is-active="makes.includes(vehicleMake.label)"
             :key="vehicleMake.label"
             :vehicle-type="vehicleMake"
             @click="handleMakeToggleClick(vehicleMake.label)"
             v-for="vehicleMake in dummyVehicleTypes"
           />
-        </SiteCarousel>
+        </BasicCarousel>
       </section>
     </div>
 
@@ -400,7 +397,7 @@
                     <span v-if="dummy.floorplanResults">({{ formatNumber(dummy.floorplanResults) }})</span>
                   </span>
 
-                  <SiteButtonToggle
+                  <BasicToggle
                     :is-active="filterStore.isFilterByFloorplans"
                     @click="filterStore.toggleIsFilterByFloorplans"
                     class="shrink-none"
@@ -469,7 +466,7 @@
                   </a>
                 </div>
 
-                <SiteButton is-secondary> Select models and floor plans </SiteButton>
+                <BasicButton is-secondary>Select models and floor plans</BasicButton>
               </div>
             </AccordionItem>
 
@@ -524,7 +521,7 @@
               :key="filter.label"
               v-for="filter in filters"
             >
-              <SiteButton
+              <BasicButton
                 @click="handleFilterChipClick(filter.callback)"
                 class="radius-full px-1 py-1/2 font-500"
                 icon-trailing="times"
@@ -532,17 +529,17 @@
                 is-solid
               >
                 {{ filter.label }}
-              </SiteButton>
+              </BasicButton>
             </li>
 
             <li>
-              <SiteButton
+              <BasicButton
                 @click="handleClearAllClick"
                 class="font-700 underline"
                 is-restyled
               >
                 Clear All
-              </SiteButton>
+              </BasicButton>
             </li>
           </ul>
 
@@ -554,7 +551,7 @@
               Featured listings
             </h2>
 
-            <VehicleCardCarousel
+            <CardCarouselFeaturedListing
               :get-is-favorite="favoriteStore.getIsFavorite"
               :handle-favorite-click="favoriteStore.toggleIsFavorite"
               :is-touchscreen="isTouchscreen"
@@ -578,7 +575,7 @@
                 ...searchResultStore.vehicles.slice(0, 6),
               ]"
             >
-              <ListingCard
+              <CardListing
                 :class="isSingleColumn ? 'mx-2' : ''"
                 :is-favorite="favoriteStore.getIsFavorite(vehicle.adId)"
                 :vehicle="vehicle"
@@ -621,16 +618,16 @@
                     Call 1-877-555-1234
                   </a>
 
-                  <SiteButton
+                  <BasicButton
                     class="border-2 border-primary radius-1/2 p-1/2 font-14 font-700"
                     is-restyled
                     is-secondary
                   >
                     View Inventory
-                  </SiteButton>
+                  </BasicButton>
                 </aside>
 
-                <VehicleCardCarousel
+                <CardCarouselFeaturedListing
                   :get-is-favorite="favoriteStore.getIsFavorite"
                   :handle-favorite-click="favoriteStore.toggleIsFavorite"
                   :is-touchscreen="isTouchscreen"
@@ -646,7 +643,7 @@
             class="flex axis1-center axis2-center gap-1 mb-2 w-full"
             v-if="filterStore.pagesTotal > 1"
           >
-            <SiteButtonIcon
+            <BasicButtonIcon
               :disabled="filterStore.pageCurrent === 1"
               @click="filterStore.setPagePrevious"
               class="pagination-button ratio-1/1"
@@ -660,7 +657,7 @@
                 :key="paginationButton"
                 v-for="paginationButton in paginationButtons"
               >
-                <SiteButton
+                <BasicButton
                   :class="`pagination-button relative flex axis1-center axis2-center radius-full p-1/2 ratio-1/1 ${
                     paginationButton === filterStore.pageCurrent ? 'border-2' : ''
                   }`"
@@ -670,11 +667,11 @@
                   is-restyled
                 >
                   <span class="absolute">{{ paginationButton }}</span>
-                </SiteButton>
+                </BasicButton>
               </li>
             </ul>
 
-            <SiteButtonIcon
+            <BasicButtonIcon
               :disabled="filterStore.pageCurrent === paginationButtons[paginationButtons.length - 1]"
               @click="filterStore.setPageNext"
               class="pagination-button"
@@ -694,14 +691,14 @@
               class="underline-none"
               v-for="searchPill in searchPills"
             >
-              <SiteButton
+              <BasicButton
                 class="radius-full underline-none"
                 icon-leading="magnifying-glass"
                 is-secondary
                 is-solid
               >
                 {{ searchPill.label }}
-              </SiteButton>
+              </BasicButton>
             </RouterLink>
           </section>
 
@@ -736,7 +733,7 @@
         </main>
       </section>
 
-      <SiteContainer>
+      <BasicContainer>
         <section v-if="!isSingleColumn">
           <SeoContent
             class="mb-2"
@@ -807,7 +804,7 @@
         </section>
 
         <SubscribeToNewsletter />
-      </SiteContainer>
+      </BasicContainer>
     </div>
   </div>
 </template>

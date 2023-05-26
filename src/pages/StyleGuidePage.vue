@@ -7,21 +7,21 @@
   import type { BreadCrumb } from '@/types/BreadCrumb';
 
   import AccordionItem from '@/components/AccordionItem.vue';
+  import BasicButton from '@/components/BasicButton.vue';
+  import BasicButtonIcon from '@/components/BasicButtonIcon.vue';
+  import BasicCarousel from '@/components/BasicCarousel.vue';
+  import BasicLinkAsButton from '@/components/BasicLinkAsButton.vue';
+  import BasicLinkWithIcon from '@/components/BasicLinkWithIcon.vue';
+  import BasicToggle from '@/components/BasicToggle.vue';
   import BreadCrumbs from '@/components/BreadCrumbs.vue';
-  import ListingCard from '@/components/ListingCard.vue';
-  import SiteButton from '@/components/SiteButton.vue';
-  import SiteButtonIcon from '@/components/SiteButtonIcon.vue';
-  import SiteButtonToggle from '@/components/SiteButtonToggle.vue';
-  import SiteLinkAsButton from '@/components/SiteLinkAsButton.vue';
-  import SiteLinkWithIcon from '@/components/SiteLinkWithIcon.vue';
-  import SiteCarousel from '@/components/SiteCarousel.vue';
-  import VehicleCard from '@/components/VehicleCard.vue';
-  import VehicleCardCarousel from '@/components/VehicleCardCarousel.vue';
+  import CardCarouselFeaturedListing from '@/components/CardCarouselFeaturedListing.vue';
+  import CardFeaturedListing from '@/components/CardFeaturedListing.vue';
+  import CardListing from '@/components/CardListing.vue';
+  import { formatKebabCase } from '@/utilities/format';
   import { useBreakpointStore } from '@/stores/BreakpointStore';
   import { useDarkModeStore } from '@/stores/DarkModeStore';
   import { useFavoriteStore } from '@/stores/FavoriteStore';
   import { useUserAgentStore } from '@/stores/UserAgentStore';
-  import { formatKebabCase } from '@/utilities/format';
 
   // Permanent reference to dummy data for demonstration purposes.
   import { dummyVehicles } from '@/data/dummy-vehicles';
@@ -574,29 +574,29 @@
         <h3 class="mb-1">Button</h3>
 
         <div class="flex wrap gap-1 mb-1 ml-1">
-          <SiteButton is-primary>Primary</SiteButton>
-          <SiteButton is-secondary>Secondary</SiteButton>
-          <SiteButton disabled>Inactive</SiteButton>
+          <BasicButton is-primary>Primary</BasicButton>
+          <BasicButton is-secondary>Secondary</BasicButton>
+          <BasicButton disabled>Inactive</BasicButton>
         </div>
 
         <div class="flex wrap gap-1 ml-1">
-          <SiteButton
+          <BasicButton
             icon-leading="star"
             is-primary
             is-solid
           >
             Leading Icon
-          </SiteButton>
+          </BasicButton>
 
-          <SiteButton
+          <BasicButton
             icon-trailing="up-right-from-square"
             is-secondary
             is-solid
           >
             Trailing Icon
-          </SiteButton>
+          </BasicButton>
 
-          <SiteButton disabled>No Icon</SiteButton>
+          <BasicButton disabled>No Icon</BasicButton>
         </div>
       </section>
 
@@ -604,11 +604,11 @@
         <h3 class="mb-1">Button Icon</h3>
 
         <div class="flex wrap gap-1 mb-1 ml-1">
-          <SiteButtonIcon
+          <BasicButtonIcon
             :icon="icon"
             :key="icon"
             :title="icon"
-            class-button="site-icon-demo border-2 border-gray-dark"
+            class="site-icon-demo border-2 border-gray-dark"
             is-primary
             is-restyled
             is-solid
@@ -617,11 +617,11 @@
         </div>
 
         <div class="flex wrap gap-1 mb-1 ml-1">
-          <SiteButtonIcon
+          <BasicButtonIcon
             :icon="icon"
             :key="icon"
             :title="icon"
-            class-button="site-icon-demo border-2 border-gray-dark"
+            class="site-icon-demo border-2 border-gray-dark"
             is-restyled
             is-secondary
             is-solid
@@ -630,7 +630,7 @@
         </div>
 
         <div class="flex wrap gap-1 ml-1">
-          <SiteButtonIcon
+          <BasicButtonIcon
             :icon="icon"
             :key="icon"
             :title="icon"
@@ -644,12 +644,68 @@
       </section>
 
       <section class="mx-2 mb-2">
-        <h3 class="mb-1">Button Toggle</h3>
+        <h3 class="mb-1">Card</h3>
 
-        <div class="flex wrap gap-1 mb-1 ml-1">
-          <SiteButtonToggle
-            :is-active="isToggleActive"
-            @click="toggleIsToggleActive"
+        <div class="mb-2">
+          <h4 class="mb-1">Featured Listing Card</h4>
+
+          <ul class="list-none">
+            <CardFeaturedListing
+              :is-favorite="favoriteStore.getIsFavorite(dummyVehicles[0].adId)"
+              :vehicle="dummyVehicles[0]"
+              @handle-favorite-click="favoriteStore.toggleIsFavorite"
+              class="font-gray-dark"
+            />
+          </ul>
+        </div>
+
+        <div class="mb-2">
+          <h4 class="mb-1">Listing Card</h4>
+
+          <ul class="list-none">
+            <CardListing
+              :is-favorite="favoriteStore.getIsFavorite(dummyVehicles[0].adId)"
+              :vehicle="dummyVehicles[0]"
+              @handle-favorite-click="favoriteStore.toggleIsFavorite"
+              class="font-gray-dark"
+            />
+          </ul>
+        </div>
+      </section>
+
+      <section class="mb-2">
+        <h3 class="mx-2 mb-1">Carousel</h3>
+
+        <div class="mb-2">
+          <h4 class="mx-2 mb-1">Basic Carousel</h4>
+
+          <BasicCarousel
+            :card-width="150"
+            :gap="16"
+            :is-touchscreen="isTouchscreen"
+            :offset-x="64"
+          >
+            <div
+              :class="darkModeStore.isDarkMode ? 'border-white font-white' : 'border-gray-dark bg-white'"
+              :key="card"
+              class="site-carousel-card-demo flex axis1-center shrink-none border-1 p-1 radius-1/2 snap-start"
+              v-for="card in cards"
+            >
+              Card demo {{ card }}
+            </div>
+          </BasicCarousel>
+        </div>
+
+        <div>
+          <h4 class="mx-2 mb-1 pl-1">Featured Listing Carousel</h4>
+
+          <CardCarouselFeaturedListing
+            :get-is-favorite="favoriteStore.getIsFavorite"
+            :handle-favorite-click="favoriteStore.toggleIsFavorite"
+            :is-touchscreen="isTouchscreen"
+            :offset-x="64"
+            :vehicles="dummyVehicles"
+            class="flex wrap gap-1 font-gray-dark"
           />
         </div>
       </section>
@@ -670,74 +726,7 @@
         </div>
       </section>
 
-      <section class="mb-2">
-        <h3 class="mx-2 mb-1">Carousel</h3>
-
-        <div class="mb-2">
-          <h4 class="mx-2 mb-1">Site Carousel</h4>
-
-          <SiteCarousel
-            :card-width="150"
-            :gap="16"
-            :is-touchscreen="isTouchscreen"
-            :offset-x="64"
-          >
-            <div
-              :class="darkModeStore.isDarkMode ? 'border-white font-white' : 'border-gray-dark bg-white'"
-              :key="card"
-              class="site-carousel-card-demo flex axis1-center shrink-none border-1 p-1 radius-1/2 snap-start"
-              v-for="card in cards"
-            >
-              Card demo {{ card }}
-            </div>
-          </SiteCarousel>
-        </div>
-
-        <div>
-          <h4 class="mx-2 mb-1 pl-1">Vehicle Card Carousel</h4>
-
-          <VehicleCardCarousel
-            :get-is-favorite="favoriteStore.getIsFavorite"
-            :handle-favorite-click="favoriteStore.toggleIsFavorite"
-            :is-touchscreen="isTouchscreen"
-            :offset-x="64"
-            :vehicles="dummyVehicles"
-            class="flex wrap gap-1 font-gray-dark"
-          />
-        </div>
-      </section>
-
       <section class="mx-2 mb-2">
-        <h3 class="mb-1">Cards</h3>
-
-        <div class="mb-2">
-          <h4 class="mb-1">Listing Card</h4>
-
-          <ul class="list-none">
-            <ListingCard
-              :is-favorite="favoriteStore.getIsFavorite(dummyVehicles[0].adId)"
-              :vehicle="dummyVehicles[0]"
-              @handle-favorite-click="favoriteStore.toggleIsFavorite"
-              class="font-gray-dark"
-            />
-          </ul>
-        </div>
-
-        <div class="mb-2">
-          <h4 class="mb-1">Vehicle Card</h4>
-
-          <ul class="list-none">
-            <VehicleCard
-              :is-favorite="favoriteStore.getIsFavorite(dummyVehicles[0].adId)"
-              :vehicle="dummyVehicles[0]"
-              @handle-favorite-click="favoriteStore.toggleIsFavorite"
-              class="font-gray-dark"
-            />
-          </ul>
-        </div>
-      </section>
-
-      <section class="mx-2">
         <h3 class="mb-1">Link</h3>
 
         <div class="ml-1">
@@ -751,21 +740,21 @@
             <h4 class="mb-1">Link with Icon</h4>
 
             <div class="flex wrap gap-2">
-              <SiteLinkWithIcon
+              <BasicLinkWithIcon
                 icon-leading="star"
                 is-solid
                 to="#"
               >
                 Leading Icon
-              </SiteLinkWithIcon>
+              </BasicLinkWithIcon>
 
-              <SiteLinkWithIcon
+              <BasicLinkWithIcon
                 icon-trailing="up-right-from-square"
                 is-solid
                 to="#"
               >
                 Trailing Icon
-              </SiteLinkWithIcon>
+              </BasicLinkWithIcon>
             </div>
           </div>
 
@@ -773,48 +762,59 @@
             <h4 class="mb-1">Link as Button</h4>
 
             <div class="flex wrap gap-1 mb-1">
-              <SiteLinkAsButton
+              <BasicLinkAsButton
                 is-primary
                 to="#"
               >
                 Primary
-              </SiteLinkAsButton>
+              </BasicLinkAsButton>
 
-              <SiteLinkAsButton
+              <BasicLinkAsButton
                 is-secondary
                 to="#"
               >
                 Secondary
-              </SiteLinkAsButton>
+              </BasicLinkAsButton>
             </div>
 
             <div class="flex wrap gap-1">
-              <SiteLinkAsButton
+              <BasicLinkAsButton
                 icon-leading="star"
                 is-primary
                 is-solid
                 to="#"
               >
                 Leading Icon
-              </SiteLinkAsButton>
+              </BasicLinkAsButton>
 
-              <SiteLinkAsButton
+              <BasicLinkAsButton
                 icon-trailing="up-right-from-square"
                 is-secondary
                 is-solid
                 to="#"
               >
                 Trailing Icon
-              </SiteLinkAsButton>
+              </BasicLinkAsButton>
 
-              <SiteLinkAsButton
+              <BasicLinkAsButton
                 is-secondary
                 to="#"
               >
                 No Icon
-              </SiteLinkAsButton>
+              </BasicLinkAsButton>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section class="mx-2">
+        <h3 class="mb-1">Toggle</h3>
+
+        <div class="flex wrap gap-1 mb-1 ml-1">
+          <BasicToggle
+            :is-active="isToggleActive"
+            @click="toggleIsToggleActive"
+          />
         </div>
       </section>
     </section>

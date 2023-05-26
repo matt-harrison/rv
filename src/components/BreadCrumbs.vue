@@ -1,6 +1,5 @@
 <script lang="ts" setup>
   import type { PropType } from 'vue';
-
   import type { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
   import type { BreadCrumb } from '@/types/BreadCrumb';

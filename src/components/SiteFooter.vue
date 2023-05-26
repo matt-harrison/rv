@@ -1,9 +1,9 @@
 <script lang="ts" setup>
   import { storeToRefs } from 'pinia';
 
-  import SiteButton from '@/components/SiteButton.vue';
-  import SiteButtonIcon from '@/components/SiteButtonIcon.vue';
-  import SiteContainer from '@/components/SiteContainer.vue';
+  import BasicButton from '@/components/BasicButton.vue';
+  import BasicButtonIcon from '@/components/BasicButtonIcon.vue';
+  import BasicContainer from '@/components/BasicContainer.vue';
   import { useBreakpointStore } from '@/stores/BreakpointStore';
 
   const breakpointStore = useBreakpointStore();
@@ -14,7 +14,7 @@
 <template>
   <footer class="site-footer flex column gap-1/4 font-14">
     <div class="py-2 bg-gray-light">
-      <SiteContainer class="flex wrap axis1-between axis2-start gap-2">
+      <BasicContainer class="flex wrap axis1-between axis2-start gap-2">
         <div
           :class="isExtraSmall ? 'order-2 w-full' : ''"
           class="site-footer-explore"
@@ -148,12 +148,12 @@
             <h2 class="font-18">Dealers</h2>
 
             <div class="flex column axis2-start gap-1">
-              <SiteButton
-                :class-button="isExtraSmall ? '' : 'w-full'"
+              <BasicButton
+                :class="isExtraSmall ? '' : 'w-full'"
                 is-secondary
               >
                 TraderTraxx Login
-              </SiteButton>
+              </BasicButton>
 
               <p>
                 <RouterLink
@@ -173,12 +173,12 @@
             <div class="flex column axis2-start gap-1">
               <span>Sell your RV fro $69.95</span>
 
-              <SiteButton
-                :class-button="isExtraSmall ? '' : 'w-full'"
+              <BasicButton
+                :class="isExtraSmall ? '' : 'w-full'"
                 is-secondary
               >
                 Sell my RV
-              </SiteButton>
+              </BasicButton>
 
               <RouterLink
                 class="font-600"
@@ -194,7 +194,7 @@
           :class="isExtraSmall ? 'order-2 axis1-center w-full' : ''"
           class="site-footer-socials flex gap-1/2 font-24"
         >
-          <SiteButtonIcon
+          <BasicButtonIcon
             class-icon="site-footer-social"
             icon="twitter"
             is-brand
@@ -202,7 +202,7 @@
             is-secondary
           />
 
-          <SiteButtonIcon
+          <BasicButtonIcon
             class-icon="site-footer-social fa-brands"
             icon="facebook-f"
             is-brand
@@ -210,7 +210,7 @@
             is-secondary
           />
 
-          <SiteButtonIcon
+          <BasicButtonIcon
             class-icon="site-footer-social fa-brands"
             icon="instagram"
             is-brand
@@ -218,7 +218,7 @@
             is-secondary
           />
 
-          <SiteButtonIcon
+          <BasicButtonIcon
             class-icon="site-footer-social fa-brands"
             icon="youtube"
             is-brand
@@ -226,7 +226,7 @@
             is-secondary
           />
 
-          <SiteButtonIcon
+          <BasicButtonIcon
             class-icon="site-footer-social fa-brands"
             icon="pinterest-p"
             is-brand
@@ -234,7 +234,7 @@
             is-secondary
           />
 
-          <SiteButtonIcon
+          <BasicButtonIcon
             class-icon="site-footer-social fa-brands"
             icon="linkedin-in"
             is-brand
@@ -242,11 +242,11 @@
             is-secondary
           />
         </div>
-      </SiteContainer>
+      </BasicContainer>
     </div>
 
     <div class="py-2 bg-gray-light">
-      <SiteContainer
+      <BasicContainer
         :class="isExtraSmall ? 'column axis2-center' : 'row'"
         class="flex wrap gap-1"
       >
@@ -271,7 +271,7 @@
         >
           Advertiser Agreement
         </RouterLink>
-      </SiteContainer>
+      </BasicContainer>
     </div>
     <slot />
   </footer>

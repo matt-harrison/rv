@@ -1,7 +1,7 @@
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
 
-  import SiteButton from '@/components/SiteButton.vue';
+  import BasicButton from '@/components/BasicButton.vue';
 
   const props = defineProps({
     classLabel: {
@@ -60,7 +60,7 @@
     </div>
 
     <div>
-      <SiteButton
+      <BasicButton
         :icon-trailing="isExpanded ? 'chevron-up' : 'chevron-down'"
         :is-restyled="true"
         @click="toggleIsExpanded"
@@ -68,7 +68,7 @@
         is-solid
       >
         <span class="underline">{{ isExpanded ? props.labelExpanded : props.labelCollapsed }}</span>
-      </SiteButton>
+      </BasicButton>
     </div>
   </div>
 </template>

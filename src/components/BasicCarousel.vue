@@ -1,7 +1,7 @@
 <script lang="ts" setup>
   import { onMounted, onUnmounted, onUpdated, ref } from 'vue';
 
-  import SiteButtonIcon from '@/components/SiteButtonIcon.vue';
+  import BasicButtonIcon from '@/components/BasicButtonIcon.vue';
 
   type Props = {
     cardWidth: number;
@@ -98,7 +98,7 @@
       class="absolute flex axis1-between axis2-center w-full h-full pointer-events-none"
       v-if="showButtons"
     >
-      <SiteButtonIcon
+      <BasicButtonIcon
         @click="showPreviousSlide"
         class="site-carousel-button ml-1 border-2 border-gray-dark pointer-events"
         icon="chevron-left"
@@ -106,7 +106,7 @@
         is-solid
       />
 
-      <SiteButtonIcon
+      <BasicButtonIcon
         @click="showNextSlide"
         class="site-carousel-button mr-1 border-2 border-gray-dark pointer-events"
         icon="chevron-right"

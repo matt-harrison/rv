@@ -1,10 +1,9 @@
 <script lang="ts" setup>
   import type { Vehicle } from '@/types/Vehicle';
 
-  import SiteIconToggle from '@/components/SiteIconToggle.vue';
-  import SiteImage from '@/components/SiteImage.vue';
+  import BasicButtonIcon from '@/components/BasicButtonIcon.vue';
+  import BasicImage from '@/components/BasicImage.vue';
   import { cdnDomain, cdnVersion } from '@/config/rv.config';
-
   import { formatPrice } from '@/utilities/format';
 
   type Props = {
@@ -34,7 +33,7 @@
     >
       <div class="flex column axis1-between h-full">
         <div>
-          <SiteImage
+          <BasicImage
             :offset="200"
             :src="thumbnail"
             assume-horizontal
@@ -58,10 +57,10 @@
             {{ formatPrice(props.vehicle.price) }}
           </span>
 
-          <SiteIconToggle
+          <BasicButtonIcon
             :is-solid="isFavorite"
             @click.prevent="handleFavoriteClick"
-            class-button="p-1/4"
+            class="p-1/4"
             icon="heart"
             is-restyled
             is-secondary
