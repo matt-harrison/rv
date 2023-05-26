@@ -356,8 +356,8 @@
     >
       <section class="flex gap-2 mb-2">
         <aside
-          :class="isSingleColumn ? '' : 'initial'"
-          class="search-results-aside shrink-none hidden bg-white"
+          class="search-results-aside shrink-none bg-white"
+          v-if="!isSingleColumn"
         >
           <div class="mb-2">
             <AccordionItem
