@@ -3,7 +3,7 @@
 
   import type { Vehicle } from '@/types/Vehicle';
 
-  import SiteButton from '@/components/SiteButton.vue';
+  import BasicButton from '@/components/BasicButton.vue';
 
   type Props = {
     vehicle: Vehicle | undefined;
@@ -95,13 +95,13 @@
     </fieldset>
 
     <div class="flex axis1-center mb-1">
-      <SiteButton
+      <BasicButton
         class="py-1 px-4"
         is-primary
         is-solid
       >
         Send Email
-      </SiteButton>
+      </BasicButton>
     </div>
 
     <p class="font-12">

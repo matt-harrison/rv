@@ -1,12 +1,12 @@
 <script lang="ts" setup>
   import { ref } from 'vue';
-
-  import type { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
   import { storeToRefs } from 'pinia';
 
-  import SiteButtonIcon from '@/components/SiteButtonIcon.vue';
+  import type { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
+  import BasicButtonIcon from '@/components/BasicButtonIcon.vue';
+  import BasicLinkAsButton from '@/components/BasicLinkAsButton.vue';
   import { useBreakpointStore } from '@/stores/BreakpointStore';
-  import SiteLinkAsButton from '@/components/SiteLinkAsButton.vue';
   import { useModalStore } from '@/stores/ModalStore';
 
   const breakpointStore = useBreakpointStore();
@@ -117,9 +117,9 @@
           Blog
         </RouterLink>
 
-        <SiteButtonIcon
+        <BasicButtonIcon
           @click="toggleShowMobileMenu"
-          class-button="site-header-icon absolute top-0 right-0 mt-1 mr-1 font-20"
+          class="site-header-icon absolute top-0 right-0 mt-1 mr-1 font-20"
           icon="xmark"
           is-solid
           v-if="isExtraSmall"
@@ -150,14 +150,14 @@
         class="flex gap-1/2"
         v-if="isExtraSmall"
       >
-        <SiteButtonIcon
+        <BasicButtonIcon
           class="site-header-icon"
           icon="magnifying-glass"
           is-secondary
           is-solid
         />
 
-        <SiteButtonIcon
+        <BasicButtonIcon
           @click="toggleShowMobileMenu"
           class="site-header-icon"
           icon="bars"
@@ -166,7 +166,7 @@
         />
       </div>
 
-      <SiteLinkAsButton
+      <BasicLinkAsButton
         :class="
           isExtraSmall
             ? 'site-header-icon flex axis1-center axis2-center radius-full ratio-1/1'
@@ -184,7 +184,7 @@
         >
           Sign In
         </span>
-      </SiteLinkAsButton>
+      </BasicLinkAsButton>
     </div>
   </header>
 </template>

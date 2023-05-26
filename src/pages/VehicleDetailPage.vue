@@ -7,19 +7,18 @@
   import type { BreadCrumb } from '@/types/BreadCrumb';
   import type { RvDetail } from '@/types/RvDetail';
 
-  import ReadMore from '@/components/ReadMore.vue';
   import AdPlaceholder from '@/components/AdPlaceholder.vue';
+  import BasicButton from '@/components/BasicButton.vue';
+  import BasicButtonIcon from '@/components/BasicButtonIcon.vue';
+  import BasicContainer from '@/components/BasicContainer.vue';
+  import BasicImage from '@/components/BasicImage.vue';
+  import BasicLinkWithIcon from '@/components/BasicLinkWithIcon.vue';
   import BreadCrumbs from '@/components/BreadCrumbs.vue';
+  import CardCarouselFeaturedListing from '@/components/CardCarouselFeaturedListing.vue';
   import LeadForm from '@/components/LeadForm.vue';
-  import SiteButton from '@/components/SiteButton.vue';
-  import SiteButtonIcon from '@/components/SiteButtonIcon.vue';
-  import SiteContainer from '@/components/SiteContainer.vue';
+  import ReadMore from '@/components/ReadMore.vue';
   import SiteDisclaimer from '@/components/SiteDisclaimer.vue';
-  import SiteIconToggle from '@/components/SiteIconToggle.vue';
-  import SiteImage from '@/components/SiteImage.vue';
-  import SiteLinkWithIcon from '@/components/SiteLinkWithIcon.vue';
   import SubscribeToNewsletter from '@/components/SubscribeToNewsletter.vue';
-  import VehicleCardCarousel from '@/components/VehicleCardCarousel.vue';
   import { cdnDomain, cdnVersion } from '@/config/rv.config';
   import { formatPrice, formatTitleCase } from '@/utilities/format';
   import { useBreakpointStore } from '@/stores/BreakpointStore';
@@ -40,7 +39,7 @@
   vehicleDetailStore.getVehicle();
 
   const { isTouchscreen } = storeToRefs(userAgentStore);
-  const { vehicle } = storeToRefs(vehicleDetailStore);
+  let { vehicle } = storeToRefs(vehicleDetailStore);
 
   const isSingleColumn = computed(() => isExtraSmall.value || isSmall.value);
 
@@ -239,8 +238,8 @@
                 to="/rvs-for-sale"
                 v-if="isSingleColumn"
               >
-                <SiteButtonIcon
-                  class-button="icon-button border-2 border-gray-dark"
+                <BasicButtonIcon
+                  class="icon-button border-2 border-gray-dark"
                   icon="chevron-left"
                   is-restyled
                   is-secondary
@@ -249,19 +248,19 @@
               </RouterLink>
 
               <div class="flex gap-1">
-                <SiteButtonIcon
-                  class-button="icon-button border-2 border-gray-dark"
+                <BasicButtonIcon
+                  class="icon-button border-2 border-gray-dark"
                   icon="arrow-up-from-bracket"
                   is-restyled
                   is-secondary
                   is-solid
                 />
 
-                <SiteIconToggle
+                <BasicButtonIcon
                   :is-active="isFavorite"
                   :is-solid="isFavorite"
                   @click.prevent="toggleIsFavorite"
-                  class-button="icon-button border-2 border-gray-dark"
+                  class="icon-button border-2 border-gray-dark"
                   icon="heart"
                   is-restyled
                   is-secondary
@@ -277,14 +276,14 @@
                   class="flex axis2-center gap-1/4"
                   v-if="vehicle?.dealerGroupName"
                 >
-                  <SiteLinkWithIcon
+                  <BasicLinkWithIcon
                     class="font-12"
                     icon-leading="circle-check"
                     is-solid
                     to="/rvs-for-sale"
                   >
                     {{ vehicle.dealerGroupName }}
-                  </SiteLinkWithIcon>
+                  </BasicLinkWithIcon>
                 </div>
 
                 <span v-if="cityState">{{ cityState }} - </span>
@@ -298,7 +297,7 @@
             <div class="radius-1/2 xy-hidden">
               <div class="relative">
                 <div class="flex axis1-center axis2-center">
-                  <SiteImage
+                  <BasicImage
                     :alt="yearMakeModel"
                     :src="thumbnail"
                     class="w-full ratio-3/2"
@@ -315,7 +314,7 @@
                 v-if="!isSingleColumn"
               >
                 <li class="relative w-1/4 ratio-3/2">
-                  <SiteImage
+                  <BasicImage
                     :alt="yearMakeModel"
                     :src="thumbnail"
                     class="absolute w-full h-full"
@@ -325,7 +324,7 @@
                 </li>
 
                 <li class="relative w-1/4 ratio-3/2">
-                  <SiteImage
+                  <BasicImage
                     :alt="yearMakeModel"
                     :src="thumbnail"
                     class="absolute w-full h-full"
@@ -334,8 +333,8 @@
                   <div class="overlay absolute w-full h-full" />
 
                   <div class="absolute flex axis1-center axis2-center w-full h-full">
-                    <SiteButtonIcon
-                      class-button="icon-button border-2 border-gray-dark"
+                    <BasicButtonIcon
+                      class="icon-button border-2 border-gray-dark"
                       icon="play"
                       is-primary
                       is-restyled
@@ -345,7 +344,7 @@
                 </li>
 
                 <li class="relative w-1/4 ratio-3/2">
-                  <SiteImage
+                  <BasicImage
                     :alt="yearMakeModel"
                     :src="thumbnail"
                     class="absolute w-full h-full"
@@ -354,8 +353,8 @@
                   <div class="overlay absolute w-full h-full" />
 
                   <div class="absolute flex axis1-center axis2-center w-full h-full">
-                    <SiteButtonIcon
-                      class-button="icon-button border-2 border-gray-dark"
+                    <BasicButtonIcon
+                      class="icon-button border-2 border-gray-dark"
                       icon="cube"
                       is-primary
                       is-restyled
@@ -365,7 +364,7 @@
                 </li>
 
                 <li class="relative w-1/4 ratio-3/2">
-                  <SiteImage
+                  <BasicImage
                     :src="thumbnail"
                     class="absolute w-full h-full"
                   />
@@ -390,45 +389,41 @@
               ref="stickableFooterRef"
               class="stickable-footer flex gap-1/2 p-2 w-full bg-white"
             >
-              <SiteButton
-                class="flex column"
-                class-button="vehicle-detail-text-cta"
+              <BasicButton
+                class="vehicle-detail-text-cta flex column"
                 icon-leading="message"
                 is-secondary
                 is-solid
               >
                 <span class="font-12 font-600">text</span>
-              </SiteButton>
+              </BasicButton>
 
-              <SiteButton
-                class="flex column"
-                class-button="vehicle-detail-call-cta"
+              <BasicButton
+                class="vehicle-detail-call-cta flex column"
                 icon-leading="phone"
                 is-primary
                 is-solid
               >
                 <span class="font-12 font-600">call</span>
-              </SiteButton>
+              </BasicButton>
 
-              <SiteButton
-                class="flex column"
-                class-button="vehicle-detail-email-cta"
+              <BasicButton
+                class="vehicle-detail-email-cta flex column"
                 icon-leading="envelope"
                 is-primary
                 is-solid
               >
                 <span class="font-12 font-600">email</span>
-              </SiteButton>
+              </BasicButton>
 
-              <SiteButton
-                class="flex column"
-                class-button="vehicle-detail-chat-cta"
+              <BasicButton
+                class="vehicle-detail-chat-cta flex column"
                 icon-leading="comments"
                 is-secondary
                 is-solid
               >
                 <span class="font-12 font-600">chat</span>
-              </SiteButton>
+              </BasicButton>
             </div>
           </section>
 
@@ -440,24 +435,23 @@
               <div class="font-20 font-700">{{ vehicle ? formatPrice(vehicle?.price) : '' }}</div>
 
               <div class="flex wrap gap-1/4 font-14">
-                <RouterLink to="#">Estimated Payment: </RouterLink>
-
-                <SiteLinkWithIcon
+                <BasicLinkWithIcon
                   icon-trailing="calculator"
                   is-solid
                   to="#"
                 >
+                  <span>Estimated Payment: </span>
                   <span class="font-700">$50/month</span>
-                </SiteLinkWithIcon>
+                </BasicLinkWithIcon>
               </div>
             </div>
 
-            <SiteButton
-              class-button="shrink-none"
+            <BasicButton
+              class="shrink-none"
               is-secondary
             >
               Make an offer
-            </SiteButton>
+            </BasicButton>
           </section>
 
           <section
@@ -555,22 +549,22 @@
                   </div>
                 </div>
 
-                <SiteLinkWithIcon
+                <BasicLinkWithIcon
                   class="mb-1"
                   icon-trailing="up-right-from-square"
                   is-solid
                   to="#"
                 >
                   Visit dealer's website
-                </SiteLinkWithIcon>
+                </BasicLinkWithIcon>
 
-                <SiteButton
+                <BasicButton
                   icon-leading="video"
                   is-secondary
                   is-solid
                 >
                   Schedule a video call
-                </SiteButton>
+                </BasicButton>
               </div>
 
               <p class="w-full m-w-1/2">
@@ -589,17 +583,17 @@
             >
               <h3 class="mb-1 font-16">More from this dealer</h3>
 
-              <SiteLinkWithIcon
+              <BasicLinkWithIcon
                 class="font-14 font-700"
                 icon-trailing="chevron-right"
                 is-solid
                 to="/rvs-for-sale"
               >
                 See more
-              </SiteLinkWithIcon>
+              </BasicLinkWithIcon>
             </div>
 
-            <VehicleCardCarousel
+            <CardCarouselFeaturedListing
               :get-is-favorite="favoriteStore.getIsFavorite"
               :handle-favorite-click="favoriteStore.toggleIsFavorite"
               :is-touchscreen="isTouchscreen"
@@ -645,8 +639,8 @@
             <div class="mb-1/4 p-1 bg-gray-light">
               <div class="flex wrap axis1-between gap-1/2">
                 <button class="flex axis2-center gap-1/2 shrink-none">
-                  <SiteButtonIcon
-                    class-button="icon-button"
+                  <BasicButtonIcon
+                    class="icon-button"
                     icon="phone"
                     is-primary
                     is-solid
@@ -661,8 +655,8 @@
                 </button>
 
                 <button class="flex axis2-center gap-1/2 shrink-none">
-                  <SiteButtonIcon
-                    class-button="icon-button"
+                  <BasicButtonIcon
+                    class="icon-button"
                     icon="message"
                     is-secondary
                     is-solid
@@ -689,24 +683,22 @@
             class="flex column gap-1 border-b border-gray pb-2 font-12"
           >
             <div class="flex axis2-center gap-1/2">
-              <SiteLinkWithIcon
+              <BasicLinkWithIcon
                 class="font-700"
                 icon-leading="star"
                 is-solid
                 to="#"
               >
                 Reviews for this RV
-              </SiteLinkWithIcon>
+              </BasicLinkWithIcon>
               <span>on</span>
 
               <div class="rv-insider-logo radius-1/2 bg-gray" />
             </div>
 
-            <div>
-              <FontAwesomeIcon
-                class="mr-1/2"
-                icon="fa-solid fa-eye"
-              />
+            <div class="flex gap-1/2">
+              <FontAwesomeIcon icon="fa-solid fa-eye" />
+
               <span>
                 <span>Seen </span>
                 <span class="font-700">
@@ -777,20 +769,20 @@
     </div>
 
     <div class="mb-2 py-2 bg-gray-light">
-      <SiteContainer class="flex axis1-between mb-1">
+      <BasicContainer class="flex axis1-between mb-1">
         <h2 class="font-20">More RVs like this</h2>
 
-        <SiteLinkWithIcon
+        <BasicLinkWithIcon
           class="font-14 font-700"
           icon-trailing="chevron-right"
           is-solid
           to="/rvs-for-sale"
         >
           See more
-        </SiteLinkWithIcon>
-      </SiteContainer>
+        </BasicLinkWithIcon>
+      </BasicContainer>
 
-      <VehicleCardCarousel
+      <CardCarouselFeaturedListing
         :get-is-favorite="favoriteStore.getIsFavorite"
         :handle-favorite-click="favoriteStore.toggleIsFavorite"
         :is-touchscreen="isTouchscreen"
@@ -799,7 +791,7 @@
       />
     </div>
 
-    <SiteContainer>
+    <BasicContainer>
       <h2 class="mb-1 font-20">Related categories</h2>
 
       <div class="flex wrap gap-1 mb-2 font-14">
@@ -809,14 +801,14 @@
           class="underline-none"
           v-for="searchPill in searchPills"
         >
-          <SiteButton
+          <BasicButton
             class="radius-full underline-none"
             icon-leading="magnifying-glass"
             is-secondary
             is-solid
           >
             {{ searchPill.label }}
-          </SiteButton>
+          </BasicButton>
         </RouterLink>
       </div>
 
@@ -828,7 +820,7 @@
       </div>
 
       <SubscribeToNewsletter />
-    </SiteContainer>
+    </BasicContainer>
   </div>
 </template>
 
