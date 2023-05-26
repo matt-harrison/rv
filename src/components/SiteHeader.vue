@@ -40,7 +40,7 @@
         to="/"
       >
         <div class="flex axis2-center">
-          <div class="site-header-logo mr-1/4 radius-1/2 bg-gray-dark" />
+          <div class="site-header-logo mr-1/4 radius-1/2 ratio-1/1 bg-gray-dark" />
           <span class="font-32 font-700">RV Trader</span>
         </div>
       </RouterLink>
@@ -121,6 +121,7 @@
           @click="toggleShowMobileMenu"
           class="site-header-icon absolute top-0 right-0 mt-1 mr-1 font-20"
           icon="xmark"
+          is-restyled
           is-solid
           v-if="isExtraSmall"
         />
@@ -153,6 +154,7 @@
         <BasicButtonIcon
           class="site-header-icon"
           icon="magnifying-glass"
+          is-restyled
           is-secondary
           is-solid
         />
@@ -161,6 +163,7 @@
           @click="toggleShowMobileMenu"
           class="site-header-icon"
           icon="bars"
+          is-restyled
           is-secondary
           is-solid
         />
@@ -205,7 +208,6 @@
 
   .site-header-logo {
     width: 30px;
-    height: 30px;
   }
 
   .site-header-search-icon {

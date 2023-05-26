@@ -94,8 +94,9 @@
           >
             <div class="flex axis2-center gap-1/4">
               <BasicButtonIcon
-                class="p-1/2"
+                class="flex axis1-center axis2-center radius-full p-1/2 ratio-1/1 font-18"
                 icon="phone"
+                is-restyled
                 is-secondary
                 is-solid
               />
@@ -119,9 +120,10 @@
             </div>
 
             <BasicButtonIcon
-              class="p-1/2"
+              class="flex axis1-center axis2-center radius-full p-1/2 ratio-1/1 font-18"
               icon="envelope"
               is-primary
+              is-restyled
               is-solid
             />
           </div>
@@ -139,7 +141,7 @@
 
         <div class="card-listing-label-flag" />
       </div>
-      <div class="absolute top-0 right-0 mt-1 mr-1">
+      <div class="absolute top-0 right-0 mt-1/2 mr-1/2">
         <BasicButtonIcon
           :is-solid="isFavorite"
           @click.prevent="handleFavoriteClick"
