@@ -1,40 +1,31 @@
 <script lang="ts" setup>
-  const props = defineProps({
-    iconLeading: {
-      default: undefined,
-      required: false,
-      type: String,
-    },
-    iconTrailing: {
-      default: undefined,
-      required: false,
-      type: String,
-    },
-    isSolid: {
-      default: false,
-      required: false,
-      type: Boolean,
-    },
-    target: {
-      default: '_self',
-      required: false,
-      type: String,
-    },
-    to: {
-      required: true,
-      type: String,
-    },
-  });
+  import type { IconType } from '@/types/Icon';
+
+  import SvgIcon from '@/components/SvgIcon.vue';
+
+  type Props = {
+    classIcon?: string;
+    iconLeading?: IconType;
+    iconTrailing?: IconType;
+    isRestyled?: boolean;
+    target?: string;
+    to: string;
+  };
+
+  const props = defineProps<Props>();
 </script>
 
 <template>
   <RouterLink
+    :class="isRestyled ? '' : 'inline-flex axis2-center gap-1/2 underline-none'"
     :target="props.target"
     :to="props.to"
-    class="basic-link-with-icon inline-flex axis2-center gap-1/2 underline-none"
+    class="basic-link-with-icon"
   >
-    <FontAwesomeIcon
-      :icon="[props.isSolid ? 'fa-solid' : 'fa-regular', `fa-${props.iconLeading}`]"
+    <SvgIcon
+      :class="classIcon"
+      :svg-id="props.iconLeading"
+      class="primary"
       v-if="props.iconLeading"
     />
 
@@ -42,11 +33,11 @@
       <slot />
     </div>
 
-    <FontAwesomeIcon
-      :icon="[props.isSolid ? 'fa-solid' : 'fa-regular', `fa-${props.iconTrailing}`]"
+    <SvgIcon
+      :class="classIcon"
+      :svg-id="props.iconTrailing"
+      class="primary"
       v-if="props.iconTrailing"
     />
   </RouterLink>
 </template>
-
-<style scoped />

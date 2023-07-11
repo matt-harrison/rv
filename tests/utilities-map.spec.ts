@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 
+import type { Raw } from '../src/types/Raw';
 import type { Vehicle } from '../src/types/Vehicle';
+
 import { mapResult, mapResults } from '../src/utilities/map';
 
 const vehicleRaw = {

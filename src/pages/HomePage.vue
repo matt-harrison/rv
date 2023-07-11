@@ -9,21 +9,26 @@
   import BasicContainer from '@/components/BasicContainer.vue';
   import BasicLinkAsButton from '@/components/BasicLinkAsButton.vue';
   import BasicLinkWithIcon from '@/components/BasicLinkWithIcon.vue';
-  import CardCarouselFeaturedListing from '@/components/CardCarouselFeaturedListing.vue';
+  import CardCarouselListingDealer from '@/components/CardCarouselListingDealer.vue';
+  import CardCarouselListingFeatured from '@/components/CardCarouselListingFeatured.vue';
+  import { useFeaturedListingStore } from '@/stores/FeaturedListingStore';
   import SeoContent from '@/components/SeoContent.vue';
+  import { ICONS } from '@/types/Icon';
   import { formatNumber } from '@/utilities/format';
-  import { useBreakpointStore } from '@/stores/BreakpointStore';
   import { useFavoriteStore } from '@/stores/FavoriteStore';
   import { useHomeStore } from '@/stores/HomeStore';
   import { useUserAgentStore } from '@/stores/UserAgentStore';
+  import { useViewportStore } from '@/stores/ViewportStore';
 
-  const breakpointStore = useBreakpointStore();
   const favoriteStore = useFavoriteStore();
+  const featuredListingStore = useFeaturedListingStore();
   const homeStore = useHomeStore();
   const userAgentStore = useUserAgentStore();
+  const viewportStore = useViewportStore();
 
-  const { isExtraSmall, isSmall } = storeToRefs(breakpointStore);
+  const { isExtraSmall, isSmall } = storeToRefs(viewportStore);
 
+  featuredListingStore.getVehicles();
   homeStore.getVehicles();
 
   const blogPosts = new Array(4).fill('').map((empty, index) => index + 1);
@@ -53,92 +58,97 @@
       :class="isExtraSmall ? 'column' : 'row'"
       class="flex axis1-center gap-2 mt-2 mx-2 mb-4"
     >
-      <form class="home-search-form flex column axis1-center shrink radius-1/2 p-2 w-full bg-gray-light">
-        <h1
-          :class="isExtraSmall ? 'qrow' : 'column'"
-          class="flex axis1-center axis2-center gap-1/2 mb-1 font-32 x-center"
-        >
-          <span class="contents m-inline">Where you go </span>
-          <span class="contents m-inline">for an RV</span>
-        </h1>
+      <form class="home-search-form flex column axis1-center shrink radius-1/2 p-2 w-full bg-primary-variant-tier-3">
+        <div class="radius-1/4 p-1 bg-white">
+          <h1
+            :class="isExtraSmall ? 'row' : 'column'"
+            class="flex axis1-center axis2-center gap-1/2 mb-1 font-32 text-center"
+          >
+            <span class="contents m-inline">Where you go </span>
+            <span class="contents m-inline">for an RV</span>
+          </h1>
 
-        <fieldset class="mb-1 border-1 border-gray radius-1/2 bg-white xy-hidden">
-          <fieldset class="flex column gap-1/4 border-b border-gray p-1">
-            <label
-              class="font-14 font-600"
-              for="keyword"
-            >
-              Find any RV
-            </label>
-
-            <input
-              class="w-full bg-white font-14"
-              id="keyword"
-              placeholder="Enter keyword or model"
-              type="text"
-            />
-          </fieldset>
-
-          <fieldset class="flex column gap-1/4 border-b border-gray p-1">
-            <label
-              class="font-14 font-600"
-              for="type"
-            >
-              RV type
-            </label>
-
-            <select
-              class="w-full bg-white font-14"
-              id="type"
-            >
-              <option>All RV types</option>
-            </select>
-          </fieldset>
-
-          <div class="flex">
-            <fieldset class="flex column gap-1/4 border-r border-gray p-1 w-1/2">
+          <fieldset class="flex column gap-1 mb-1">
+            <fieldset class="flex column gap-1/4">
               <label
-                class="font-14 font-600"
-                for="distance"
+                class="font-14"
+                for="type"
               >
-                Search within
-              </label>
-
-              <select
-                class="w-full bg-white font-14"
-                id="distance"
-              >
-                <option>Any dist.</option>
-              </select>
-            </fieldset>
-
-            <fieldset class="flex column gap-1/4 p-1 w-1/2">
-              <label
-                class="font-14 font-600"
-                for="location"
-              >
-                Location
+                RV type
               </label>
 
               <input
-                class="w-full bg-white font-14"
-                id="location"
+                class="border-1 border-gray radius-1/4 p-1 bg-white font-14"
+                id="type"
                 type="text"
-                value="Seattle, WA"
               />
             </fieldset>
-          </div>
-        </fieldset>
 
-        <BasicLinkAsButton
-          class="mb-1 radius-1/2 p-1 w-full"
-          icon-leading="magnifying-glass"
-          is-primary
-          is-solid
-          to="/rvs-for-sale"
-        >
-          Search
-        </BasicLinkAsButton>
+            <fieldset class="flex column gap-1/4">
+              <label
+                class="font-14"
+                for="keyword"
+              >
+                Make, model, keyword
+              </label>
+
+              <input
+                class="border-1 border-gray radius-1/4 p-1 bg-white font-14"
+                id="keyword"
+                type="text"
+              />
+            </fieldset>
+
+            <fieldset class="flex gap-1/2">
+              <fieldset class="flex column gap-1/4 w-1/2">
+                <label
+                  class="font-14"
+                  for="zip"
+                >
+                  Zip code
+                </label>
+
+                <input
+                  class="border-1 border-gray radius-1/4 p-1 w-full bg-white font-14"
+                  id="zip"
+                  type="text"
+                />
+              </fieldset>
+
+              <fieldset class="flex column gap-1/4 w-1/2">
+                <label
+                  class="font-14"
+                  for="distance"
+                >
+                  Search within
+                </label>
+
+                <select
+                  class="border-1 border-gray radius-1/4 p-1 w-full bg-white font-14"
+                  id="distance"
+                >
+                  <option>150 mi</option>
+                </select>
+              </fieldset>
+            </fieldset>
+          </fieldset>
+
+          <BasicLinkAsButton
+            class="primary tier-1 mb-1 w-full"
+            to="/rvs-for-sale"
+          >
+            Search
+          </BasicLinkAsButton>
+
+          <div class="flex axis1-center">
+            <RouterLink
+              class="font-14 font-700"
+              to="#"
+            >
+              Sell your RV
+            </RouterLink>
+          </div>
+        </div>
       </form>
 
       <div class="home-alpha-dma-ad flex axis1-center axis2-center radius-1/2 w-full bg-gray-light font-gray font-700">
@@ -153,7 +163,7 @@
       >
         <h2
           :class="{
-            'border-r pr-1': !breakpointStore.isExtraSmall,
+            'border-r pr-1': !viewportStore.isExtraSmall,
           }"
           class="border-gray font-32 whitespace-nowrap"
         >
@@ -189,7 +199,7 @@
     <BasicContainer class="mb-4">
       <section
         :class="isExtraSmall ? 'column p-2' : 'row p-4'"
-        class="home-sell-your-vehicle flex gap-2 mb-4 radius-1/2 bg-gray-light y-hidden"
+        class="home-sell-your-vehicle flex gap-2 mb-4 radius-1/2 bg-primary-variant-tier-3 y-hidden"
       >
         <div
           :class="isExtraSmall ? '' : 'w-1/2'"
@@ -197,12 +207,7 @@
         >
           <h2 class="font-32">Sell your RV on RV Trader</h2>
           <p>Millions of buyers are looking for their next RV on RV Trader this month.</p>
-          <BasicButton
-            class="px-4 whitespace-nowrap"
-            is-primary
-          >
-            Sell my RV
-          </BasicButton>
+          <BasicButton class="primary tier-2 px-4 whitespace-nowrap">Sell my RV</BasicButton>
         </div>
 
         <div
@@ -222,13 +227,17 @@
       </AdPlaceholder>
     </BasicContainer>
 
+    <section class="mb-4">
+      <CardCarouselListingDealer :vehicles="featuredListingStore.vehicles" />
+    </section>
+
     <section class="mr-2 mb-4">
       <BasicContainer>
         <h2 class="mb-1 font-24">Featured listings</h2>
       </BasicContainer>
 
       <div class="flex gap-2">
-        <CardCarouselFeaturedListing
+        <CardCarouselListingFeatured
           :get-is-favorite="favoriteStore.getIsFavorite"
           :handle-favorite-click="favoriteStore.toggleIsFavorite"
           :is-touchscreen="isTouchscreen"
@@ -240,7 +249,7 @@
         <AdPlaceholder
           class="shrink-none"
           height="250"
-          v-if="!breakpointStore.isExtraSmall"
+          v-if="!viewportStore.isExtraSmall"
           width="300"
         />
       </div>
@@ -251,7 +260,7 @@
         <h2 class="mb-1 font-24">Recommended RVs</h2>
       </BasicContainer>
 
-      <CardCarouselFeaturedListing
+      <CardCarouselListingFeatured
         :get-is-favorite="favoriteStore.getIsFavorite"
         :handle-favorite-click="favoriteStore.toggleIsFavorite"
         :is-touchscreen="isTouchscreen"
@@ -272,29 +281,20 @@
             class="flex column gap-1 m-1/4 p-1/2 w-full m-w-1/2 shadow-box underline-none"
             to="#"
           >
-            <div class="bg-gray ratio-3/2" />
+            <div class="border-overlay radius-1/4 bg-gray ratio-3/2" />
 
-            <div class="flex column gap-1/2">
-              <span class="font-12 font-600">Blog date {{ blogPosts[0] }}</span>
-              <h3 class="font-20">Blog headline {{ blogPosts[0] }}</h3>
-              <p class="home-blog-preview font-14 y-hidden">
+            <div class="flex column">
+              <span class="mb-1/2 font-12 font-600">Blog date {{ blogPosts[0] }}</span>
+              <h3 class="mb-1 font-20">Blog headline {{ blogPosts[0] }}</h3>
+              <p class="home-blog-preview mb-1 font-14 y-hidden">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda aperiam iure officia, nostrum labore
                 qui eligendi! Incidunt, obcaecati adipisci. Quibusdam doloribus at minus culpa autem eaque odit. Earum,
                 cum esse.
               </p>
-
-              <BasicLinkWithIcon
-                class="font-14 font-700"
-                icon-trailing="chevron-right"
-                is-solid
-                to="#"
-              >
-                Learn more
-              </BasicLinkWithIcon>
             </div>
           </RouterLink>
 
-          <div class="flex column gap-1 w-full m-w-1/2">
+          <div class="flex column w-full m-w-1/2">
             <RouterLink
               :class="isExtraSmall ? 'column' : 'row'"
               :key="blogPost"
@@ -304,22 +304,23 @@
             >
               <div
                 :class="isSmall ? 'w-1/3' : ''"
-                class="home-blog-thumb-small shrink-none bg-gray ratio-3/2"
+                class="home-blog-thumb-small shrink-none border-overlay radius-1/4 w-full bg-gray ratio-3/2"
               />
 
-              <div class="flex column gap-1/2">
-                <span class="font-12 font-600">Blog date {{ blogPost }}</span>
-                <h3 class="font-20">Blog headline {{ blogPost }}</h3>
-                <p class="home-blog-preview y-hidden font-14">
+              <div class="flex column">
+                <span class="mb-1/2 font-12 font-600">Blog date {{ blogPost }}</span>
+
+                <h3 class="mb-1 font-20">Blog headline {{ blogPost }}</h3>
+
+                <p class="home-blog-preview mb-1 y-hidden font-14">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda aperiam iure officia, nostrum
                   labore qui eligendi! Incidunt, obcaecati adipisci. Quibusdam doloribus at minus culpa autem eaque
                   odit. Earum, cum esse.
                 </p>
 
                 <BasicLinkWithIcon
+                  :icon-trailing="ICONS.CHEVRON_RIGHT"
                   class="font-14 font-700"
-                  icon-trailing="chevron-right"
-                  is-solid
                   to="#"
                 >
                   Learn more
@@ -332,7 +333,7 @@
 
       <section
         class="flex axis1-center mb-4"
-        v-if="!breakpointStore.isExtraSmall"
+        v-if="!viewportStore.isExtraSmall"
       >
         <AdPlaceholder
           height="90"
@@ -356,7 +357,7 @@
 
         <AdPlaceholder
           height="250"
-          v-if="!breakpointStore.isExtraSmall"
+          v-if="!viewportStore.isExtraSmall"
           width="300"
         />
       </section>

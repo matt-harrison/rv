@@ -9,7 +9,7 @@
 
 <template>
   <button
-    :class="props.isActive ? 'bg-blue-light' : 'bg-gray-light'"
+    :class="props.isActive ? 'bg-primary-variant-tier-3' : 'bg-gray-light'"
     class="basic-toggle flex axis2-center border-1 border-gray radius-full"
   >
     <div

@@ -1,7 +1,8 @@
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
 
-  import type { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+  import SvgIcon from '@/components/SvgIcon.vue';
+  import { ICONS } from '@/types/Icon';
 
   const props = defineProps({
     classLabel: {
@@ -51,7 +52,7 @@
         {{ props.label }}
       </span>
 
-      <FontAwesomeIcon :icon="`fa-solid fa-${isExpanded ? 'chevron-up' : 'chevron-down'}`" />
+      <SvgIcon :svg-id="isExpanded ? ICONS.CHEVRON_UP : ICONS.CHEVRON_DOWN" />
     </div>
 
     <div

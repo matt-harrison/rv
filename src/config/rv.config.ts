@@ -1,7 +1,9 @@
+const realmId = 'RV';
+
 const cdnDomain = 'cdn.rvtrader.com';
 const cdnVersion = 'vLatest';
 
 const vehicleTypePlural = 'RVs';
 const vehicleTypeSingular = 'RV';
 
-export { cdnDomain, cdnVersion, vehicleTypePlural, vehicleTypeSingular };
+export { cdnDomain, cdnVersion, vehicleTypePlural, vehicleTypeSingular, realmId };

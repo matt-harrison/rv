@@ -2,17 +2,17 @@
   import { storeToRefs } from 'pinia';
 
   import BasicButton from '@/components/BasicButton.vue';
-  import { useBreakpointStore } from '@/stores/BreakpointStore';
+  import { useViewportStore } from '@/stores/ViewportStore';
 
-  const breakpointStore = useBreakpointStore();
+  const viewportStore = useViewportStore();
 
-  const { isExtraSmall, isSmall } = storeToRefs(breakpointStore);
+  const { isExtraSmall, isSmall } = storeToRefs(viewportStore);
 </script>
 
 <template>
   <div
     :class="isExtraSmall || isSmall ? 'column axis2-center' : 'row'"
-    class="flex column axis1-center gap-2"
+    class="subscribe-to-newsletter flex axis1-center gap-2"
   >
     <h2 :class="isExtraSmall || isSmall ? 'font-20' : 'pt-1/2'">Subscribe to our newsletter</h2>
 
@@ -24,12 +24,7 @@
           type="text"
         />
 
-        <BasicButton
-          class="px-2"
-          is-primary
-        >
-          Submit
-        </BasicButton>
+        <BasicButton class="primary tier-1 px-2"> Submit </BasicButton>
       </div>
 
       <p class="font-12 font-600">

@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-  import { onMounted, onUnmounted, onUpdated, ref } from 'vue';
+  import { onMounted, onUnmounted, onUpdated, ref, watch } from 'vue';
 
   import BasicButtonIcon from '@/components/BasicButtonIcon.vue';
+  import { ICONS } from '@/types/Icon';
 
   type Props = {
-    cardWidth: number;
     gap: number;
     isTouchscreen?: boolean;
     offsetX?: number;
@@ -15,6 +15,8 @@
     offsetX: 0,
   });
 
+  const emit = defineEmits(['slideChange']);
+
   let contentWidth = ref();
   let frameWidth = ref();
   let hasOverflow = ref();
@@ -23,7 +25,25 @@
   const contentRef = ref();
   const frameRef = ref();
   const showButtons = ref();
-  const slideIncrement = props.cardWidth + props.gap;
+  const currentSlide = ref(0);
+
+  /**
+   * Measure the current slide based on the scroll
+   * position of the frame. The current slide is
+   * the slide that is closest to the left edge of
+   * the frame.
+   */
+  const measureCurrentSlide = () => {
+    // get left offsets of each slide
+    const slideOffsets = Array.from(contentRef.value.children).map((slide: any) => slide.offsetLeft);
+    if (slideOffsets.length === 0) return;
+    // get value closest to current scroll position
+    const closestSlideOffset = slideOffsets.reduce((prev, curr) => {
+      return Math.abs(curr - frameRef.value.scrollLeft) < Math.abs(prev - frameRef.value.scrollLeft) ? curr : prev;
+    });
+    // set current slide to index of closest slide
+    currentSlide.value = slideOffsets.indexOf(closestSlideOffset);
+  };
 
   const measureDom = () => {
     contentWidth.value = contentRef.value.scrollWidth;
@@ -31,25 +51,48 @@
     hasOverflow.value = contentWidth.value > frameWidth.value;
     lastPosition.value = frameRef.value.scrollWidth - frameRef.value.clientWidth;
     showButtons.value = hasOverflow.value && !props.isTouchscreen;
+    measureCurrentSlide();
   };
 
-  window.addEventListener('resize', measureDom);
+  // TODO: debounce this
+  const handleScroll = () => {
+    measureDom();
+  };
+
+  /**
+   * Scrolls to the slide at the given index, or
+   * to the first or last slide if the given index
+   * is out of bounds.
+   * @param slideIndex The index of the slide to scroll to
+   */
+  const scrollToSlide = (slideIndex: number) => {
+    let slideToScrollTo;
+    const goToStart = slideIndex > contentRef.value.children.length - 1;
+    const goToEnd = slideIndex < 0;
+    const slides = contentRef.value.children;
+    if (goToStart) {
+      slideToScrollTo = 0;
+    } else if (goToEnd) {
+      slideToScrollTo = slides.length - 1;
+    } else {
+      slideToScrollTo = slideIndex;
+    }
+    const newScrollPosition = slides[slideToScrollTo].offsetLeft;
+    frameRef.value.scrollTo({
+      behavior: 'smooth',
+      left: newScrollPosition,
+    });
+  };
 
   const showNextSlide = () => {
-    if (frameRef.value.scrollLeft === lastPosition.value) {
-      frameRef.value.scrollLeft = 0;
-    } else {
-      frameRef.value.scrollLeft += slideIncrement;
-    }
+    scrollToSlide(currentSlide.value + 1);
   };
 
   const showPreviousSlide = () => {
-    if (frameRef.value.scrollLeft === 0) {
-      frameRef.value.scrollLeft = lastPosition.value + slideIncrement;
-    } else {
-      frameRef.value.scrollLeft -= slideIncrement;
-    }
+    scrollToSlide(currentSlide.value - 1);
   };
+
+  window.addEventListener('resize', measureDom);
 
   onMounted(() => {
     measureDom();
@@ -62,15 +105,20 @@
   onUpdated(() => {
     measureDom();
   });
+
+  watch(currentSlide, () => {
+    emit('slideChange', currentSlide.value);
+  });
 </script>
 
 <template>
   <section
     ref="carouselRef"
-    class="site-carousel relative flex axis2-center max-w-full"
+    class="basic-carousel relative flex axis2-center max-w-full"
   >
     <div
       ref="frameRef"
+      @scroll="handleScroll"
       class="scrollbar-none snap x-scroll"
     >
       <ul
@@ -99,26 +147,18 @@
       v-if="showButtons"
     >
       <BasicButtonIcon
+        :icon="ICONS.CHEVRON_LEFT"
         @click="showPreviousSlide"
-        class="site-carousel-button ml-1 border-2 border-gray-dark pointer-events"
-        icon="chevron-left"
-        is-secondary
-        is-solid
+        class="tertiary ml-1 bg-white pointer-events shadow-box"
+        is-restyled
       />
 
       <BasicButtonIcon
+        :icon="ICONS.CHEVRON_RIGHT"
         @click="showNextSlide"
-        class="site-carousel-button mr-1 border-2 border-gray-dark pointer-events"
-        icon="chevron-right"
-        is-secondary
-        is-solid
+        class="tertiary mr-1 bg-white pointer-events shadow-box"
+        is-restyled
       />
     </div>
   </section>
 </template>
-
-<style>
-  .site-carousel-button {
-    width: 36px;
-  }
-</style>

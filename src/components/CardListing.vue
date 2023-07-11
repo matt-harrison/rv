@@ -1,12 +1,12 @@
 <script lang="ts" setup>
   import { ref } from 'vue';
 
-  import type { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-
   import type { Vehicle } from '@/types/Vehicle';
 
   import BasicButtonIcon from '@/components/BasicButtonIcon.vue';
   import BasicImage from '@/components/BasicImage.vue';
+  import BasicLinkWithIcon from '@/components/BasicLinkWithIcon.vue';
+  import { ICONS } from '@/types/Icon';
   import { cdnDomain, cdnVersion } from '@/config/rv.config';
   import { formatPhone, formatPrice, formatTitleCase } from '@/utilities/format';
 
@@ -15,7 +15,7 @@
     vehicle: Vehicle;
   };
 
-  const emit = defineEmits(['handleFavoriteClick']);
+  const emit = defineEmits(['favoriteClick']);
 
   const props = defineProps<Props>();
 
@@ -25,14 +25,17 @@
   const dummy = {
     address: '123 Main St',
     hasHiddenPhone: Math.floor(Math.random() * 2),
-    label: Math.floor(Math.random() * 10) === 0 ? 'Delivery Available' : undefined,
     milesAway: 21,
     stockNumber: '326303',
     zip: '12345',
   };
 
-  const adType: string | undefined = props.vehicle.isPremium === '1' ? 'Premium' : undefined;
+  const isPremium = props.vehicle.isPremium === '1';
+  const adType: string | undefined = isPremium ? 'Premium' : undefined;
   const cityState = props.vehicle ? `${formatTitleCase(props.vehicle.city)}, ${props.vehicle.stateCode}` : null;
+
+  // TODO: Raw object is accidentally preserved if raw value is empty!
+  const phone = typeof props.vehicle.phone === 'object' ? '7571234567' : props.vehicle.phone;
 
   const thumbnail: string | undefined =
     props.vehicle.photoIds.length > 0
@@ -44,7 +47,7 @@
   };
 
   const handleFavoriteClick = () => {
-    emit('handleFavoriteClick', props.vehicle.adId);
+    emit('favoriteClick', props.vehicle.adId);
   };
 </script>
 
@@ -56,13 +59,15 @@
     >
       <div class="flex column axis1-between gap-1/2 p-1/2 h-full">
         <div class="flex column gap-1/2">
-          <BasicImage
-            :offset="200"
-            :src="thumbnail"
-            assume-horizontal
-            class="site-carousel-card-img mb-1/2 w-full"
-            is-lazy-load
-          />
+          <div class="mb-1/2 border-overlay radius-1/4">
+            <BasicImage
+              :offset="200"
+              :src="thumbnail"
+              assume-horizontal
+              class="site-carousel-card-img w-full"
+              is-lazy-load
+            />
+          </div>
 
           <div class="flex column gap-1/4">
             <div class="font-12">
@@ -88,17 +93,16 @@
             {{ props.vehicle.price ? formatPrice(props.vehicle.price) : '' }}
           </span>
 
-          <div
-            class="flex wrap axis1-end axis2-center gap-1/2 grow"
-            v-if="props.vehicle.phone"
-          >
-            <div class="flex axis2-center gap-1/4">
-              <BasicButtonIcon
-                class="flex axis1-center axis2-center radius-full p-1/2 ratio-1/1 font-18"
-                icon="phone"
+          <div class="flex wrap axis1-end axis2-center gap-1 grow">
+            <div
+              class="flex axis2-center gap-1/2"
+              v-if="phone"
+            >
+              <BasicLinkWithIcon
+                :icon-leading="ICONS.PHONE"
+                class-icon="bg-white font-dark-gray"
                 is-restyled
-                is-secondary
-                is-solid
+                to="/listing"
               />
 
               <button
@@ -106,25 +110,23 @@
                 class="font-700 underline"
                 v-if="!showPhone && dummy.hasHiddenPhone"
               >
-                Show phone number
+                Show number
               </button>
 
               <a
                 @click.stop
                 class="font-700"
-                href="tel:+{{ props.vehicle.phone }}"
+                href="tel:+{{ phone }}"
                 v-if="showPhone || !dummy.hasHiddenPhone"
               >
-                Call {{ formatPhone(parseInt(props.vehicle.phone, 10)) }}
+                {{ formatPhone(parseInt(phone, 10)) }}
               </a>
             </div>
 
             <BasicButtonIcon
-              class="flex axis1-center axis2-center radius-full p-1/2 ratio-1/1 font-18"
-              icon="envelope"
-              is-primary
+              :icon="ICONS.ENVELOPE"
+              class="primary tier-1 flex axis1-center axis2-center radius-full"
               is-restyled
-              is-solid
             />
           </div>
         </div>
@@ -132,23 +134,21 @@
 
       <div
         class="card-listing-label absolute top-0 flex mt-1"
-        v-if="dummy.label"
+        v-if="isPremium"
       >
         <div class="flex gap-1/2 p-1/2 bg-white">
-          <FontAwesomeIcon icon="fa-solid fa-bookmark" />
-          <span class="font-12 font-600">{{ dummy.label }}</span>
+          <SvgIcon :svg-id="ICONS.BOOKMARK" />
+          <span class="font-12 font-600">Premium</span>
         </div>
 
         <div class="card-listing-label-flag" />
       </div>
-      <div class="absolute top-0 right-0 mt-1/2 mr-1/2">
+
+      <div class="absolute top-0 right-0 mt-1 mr-1">
         <BasicButtonIcon
-          :is-solid="isFavorite"
+          :icon="isFavorite ? ICONS.HEART : ICONS.HEART_OPEN"
           @click.prevent="handleFavoriteClick"
-          class="p-1/2 font-18"
-          icon="heart"
-          is-restyled
-          is-secondary
+          class="tertiary shadow-box"
         />
       </div>
     </RouterLink>

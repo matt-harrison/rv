@@ -25,7 +25,7 @@ export type Vehicle = {
   classId: string;
   className: string;
   companyName: string;
-  condition: string;
+  condition: string[];
   createDate: string;
   createDateFormatted: string;
   customerId: string;

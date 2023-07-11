@@ -1,0 +1,49 @@
+.border-overlay {
+  position: relative;
+  /* prevent z-index from leaking out */
+  isolation: isolate;
+}
+
+.border-overlay::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(0, 0, 0, .1);
+  border-radius: inherit;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+.object-scale-down {
+  object-fit: scale-down;
+}
+
+.opacity-0 {opacity: 0;}
+.opacity-25 {opacity: .25;}
+.opacity-50 {opacity: .5;}
+.opacity-75 {opacity: .75;}
+.opacity-100 {opacity: 1;}
+
+.w-0 {width: 0;}
+.h-0 {height: 0;}
+
+.scrollbar-none {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.scrollbar-none::-webkit-scrollbar { /* WebKit */
+  display: none;
+}
+
+.top-1\/2    {top: 50%;}
+.right-1\/2  {right: 50%;}
+.bottom-1\/2 {bottom: 50%;}
+.left-1\/2   {left: 50%;}
+
+.-translate-1\/2 {transform: translate(-50%, -50%);}
+.-translate-y-1\/2 {transform: translateY(-50%);}
+.-translate-x-1\/2 {transform: translateX(-50%);}

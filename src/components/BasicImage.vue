@@ -17,7 +17,7 @@
     src: undefined,
   });
 
-  const siteImage = ref();
+  const basicImage = ref();
 
   const imageDefault = `https://${cdnDomain}/image-coming-soon-512.png`;
 
@@ -32,14 +32,14 @@
   };
 
   const setImageFromDefault = () => {
-    siteImage.value.src = imageDefault;
+    basicImage.value.src = imageDefault;
   };
 
   const setImageFromSrc = () => {
-    siteImage.value.src = props.src;
+    basicImage.value.src = props.src;
   };
 
-  defineExpose(siteImage.value);
+  defineExpose(basicImage.value);
 
   const observer = new IntersectionObserver((entries, observer) => {
     entries.forEach(
@@ -57,21 +57,21 @@
 
   onMounted(() => {
     if (props.isLazy) {
-      observer.observe(siteImage.value);
+      observer.observe(basicImage.value);
     } else {
       loadImage();
     }
   });
 
   onBeforeUnmount(() => {
-    observer.unobserve(siteImage.value);
+    observer.unobserve(basicImage.value);
   });
 </script>
 
 <template>
   <img
     :alt="alt"
-    ref="siteImage"
+    ref="basicImage"
     :src="isLazy && src ? src : imageDefault"
     class="basic-image object-center object-cover"
   />

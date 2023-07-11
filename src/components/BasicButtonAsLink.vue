@@ -1,35 +1,25 @@
 <script lang="ts" setup>
-  const props = defineProps({
-    iconLeading: {
-      default: undefined,
-      required: false,
-      type: String,
-    },
-    iconTrailing: {
-      default: undefined,
-      required: false,
-      type: String,
-    },
-    isRestyled: {
-      default: false,
-      required: false,
-      type: Boolean,
-    },
-    isSolid: {
-      default: false,
-      required: false,
-      type: Boolean,
-    },
-  });
+  import type { IconType } from '@/types/Icon';
+
+  import SvgIcon from '@/components/SvgIcon.vue';
+
+  type Props = {
+    iconLeading?: IconType;
+    iconTrailing?: IconType;
+    isPrimary?: boolean;
+    isRestyled?: boolean;
+  };
+
+  const props = defineProps<Props>();
 </script>
 
 <template>
   <button
     :class="props.isRestyled ? '' : 'flex axis1-center axis2-center gap-1/2'"
-    class="basic-button"
+    class="basic-button-as-link"
   >
-    <FontAwesomeIcon
-      :icon="[props.isSolid ? 'fa-solid' : 'fa-regular', `fa-${props.iconLeading}`]"
+    <SvgIcon
+      :svg-id="props.iconLeading"
       v-if="props.iconLeading"
     />
 
@@ -37,11 +27,9 @@
       <slot />
     </div>
 
-    <FontAwesomeIcon
-      :icon="[props.isSolid ? 'fa-solid' : 'fa-regular', `fa-${props.iconTrailing}`]"
+    <SvgIcon
+      :svg-id="props.iconTrailing"
       v-if="props.iconTrailing"
     />
   </button>
 </template>
-
-<style scoped />

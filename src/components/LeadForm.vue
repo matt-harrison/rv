@@ -1,19 +1,16 @@
 <script lang="ts" setup>
   import { ref } from 'vue';
-
-  import type { Vehicle } from '@/types/Vehicle';
-
+  import type { VehicleDetail } from '@/types/VehicleDetail';
   import BasicButton from '@/components/BasicButton.vue';
+  import { getVehicleTitle } from '@/utilities/vehicle';
 
   type Props = {
-    vehicle: Vehicle | undefined;
+    vehicle: VehicleDetail | undefined;
   };
 
   const props = defineProps<Props>();
 
-  const comments = ref(
-    props.vehicle ? `Is this ${props.vehicle.year} ${props.vehicle.makeName} ${props.vehicle.modelName} for sale?` : ''
-  );
+  const comments = ref(props.vehicle ? `Is this ${getVehicleTitle(props.vehicle)} for sale?` : '');
 </script>
 
 <template>
@@ -95,13 +92,7 @@
     </fieldset>
 
     <div class="flex axis1-center mb-1">
-      <BasicButton
-        class="py-1 px-4"
-        is-primary
-        is-solid
-      >
-        Send Email
-      </BasicButton>
+      <BasicButton class="primary tier-1 w-full">Send email</BasicButton>
     </div>
 
     <p class="font-12">

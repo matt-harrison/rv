@@ -1,19 +1,54 @@
 <script lang="ts" setup>
   import { storeToRefs } from 'pinia';
 
-  import BasicButton from '@/components/BasicButton.vue';
-  import BasicButtonIcon from '@/components/BasicButtonIcon.vue';
+  import type { IconType } from '@/types/Icon';
+
   import BasicContainer from '@/components/BasicContainer.vue';
-  import { useBreakpointStore } from '@/stores/BreakpointStore';
+  import BasicLinkAsButton from '@/components/BasicLinkAsButton.vue';
+  import BasicLinkAsButtonIcon from '@/components/BasicLinkAsButtonIcon.vue';
+  import { ICONS } from '@/types/Icon';
+  import { useViewportStore } from '@/stores/ViewportStore';
 
-  const breakpointStore = useBreakpointStore();
+  const viewportStore = useViewportStore();
 
-  const { isExtraSmall } = storeToRefs(breakpointStore);
+  type SocialLink = {
+    icon: IconType;
+    url: string;
+  };
+
+  const socialLinks: SocialLink[] = [
+    {
+      icon: ICONS.TWITTER,
+      url: 'https://twitter.com/RVTrder',
+    },
+    {
+      icon: ICONS.FACEBOOK,
+      url: 'https://www.facebook.com/rvtrader',
+    },
+    {
+      icon: ICONS.INSTAGRAM,
+      url: 'https://www.instagram.com/RVTrader',
+    },
+    {
+      icon: ICONS.YOUTUBE,
+      url: 'https://www.youtube.com/RVTraderVideo',
+    },
+    {
+      icon: ICONS.PINTEREST,
+      url: 'https://www.pinterest.com/RVTrader',
+    },
+    {
+      icon: ICONS.LINKED_IN,
+      url: 'https://www.linkedin.com/showcase/rvtrader',
+    },
+  ];
+
+  const { isExtraSmall } = storeToRefs(viewportStore);
 </script>
 
 <template>
   <footer class="site-footer flex column gap-1/4 font-14">
-    <div class="py-2 bg-gray-light">
+    <div class="py-2 bg-beige">
       <BasicContainer class="flex wrap axis1-between axis2-start gap-2">
         <div
           :class="isExtraSmall ? 'order-2 w-full' : ''"
@@ -34,42 +69,42 @@
                 class="underline-none"
                 to="#"
               >
-                RVTrader.com Blog
+                RVTrader.com blog
               </RouterLink>
 
               <RouterLink
                 class="underline-none"
                 to="#"
               >
-                Site Map
+                Site map
               </RouterLink>
 
               <RouterLink
                 class="underline-none"
                 to="#"
               >
-                Need Help?
+                Need help?
               </RouterLink>
 
               <RouterLink
                 class="underline-none"
                 to="#"
               >
-                Email Us Feedback
+                Email us feedback
               </RouterLink>
 
               <RouterLink
                 class="underline-none"
                 to="#"
               >
-                Security Center
+                Security center
               </RouterLink>
 
               <RouterLink
                 class="underline-none"
                 to="#"
               >
-                Community Guidelines
+                Community guidelines
               </RouterLink>
             </div>
           </div>
@@ -86,56 +121,56 @@
               class="underline-none"
               to="#"
             >
-              Airplanes For Sale
+              Airplanes for sale
             </RouterLink>
 
             <RouterLink
               class="underline-none"
               to="#"
             >
-              ATVs For Sale
+              ATVs for sale
             </RouterLink>
 
             <RouterLink
               class="underline-none"
               to="#"
             >
-              Trucks For Sale
+              Trucks for sale
             </RouterLink>
 
             <RouterLink
               class="underline-none"
               to="#"
             >
-              Motorcycles For Sale
+              Motorcycles for sale
             </RouterLink>
 
             <RouterLink
               class="underline-none"
               to="#"
             >
-              Heavy Equipment For Sale
+              Heavy Equipment for sale
             </RouterLink>
 
             <RouterLink
               class="underline-none"
               to="#"
             >
-              Jet Skis For Sale
+              Jet Skis for sale
             </RouterLink>
 
             <RouterLink
               class="underline-none"
               to="#"
             >
-              Snowmobiles For Sale
+              Snowmobiles for sale
             </RouterLink>
 
             <RouterLink
               class="underline-none"
               to="#"
             >
-              Boats For Sale
+              Boats for sale
             </RouterLink>
           </div>
         </div>
@@ -148,12 +183,14 @@
             <h2 class="font-18">Dealers</h2>
 
             <div class="flex column axis2-start gap-1">
-              <BasicButton
-                :class="isExtraSmall ? '' : 'w-full'"
-                is-secondary
+              <BasicLinkAsButton
+                :class="isExtraSmall ? 'w-full' : 'px-1'"
+                class="secondary radius-1/4 p-1/2"
+                is-restyled
+                to="#"
               >
-                TraderTraxx Login
-              </BasicButton>
+                TraderTraxx login
+              </BasicLinkAsButton>
 
               <p>
                 <RouterLink
@@ -171,14 +208,16 @@
             <h2 class="mb-1 font-18">Private sellers</h2>
 
             <div class="flex column axis2-start gap-1">
-              <span>Sell your RV fro $69.95</span>
+              <span>Sell your RV for $69.95</span>
 
-              <BasicButton
-                :class="isExtraSmall ? '' : 'w-full'"
-                is-secondary
+              <BasicLinkAsButton
+                :class="isExtraSmall ? 'w-full' : 'px-1'"
+                class="secondary radius-1/4 p-1/2"
+                is-restyled
+                to=""
               >
                 Sell my RV
-              </BasicButton>
+              </BasicLinkAsButton>
 
               <RouterLink
                 class="font-600"
@@ -192,60 +231,21 @@
 
         <div
           :class="isExtraSmall ? 'order-2 axis1-center w-full' : ''"
-          class="site-footer-socials flex gap-1/2 font-24"
+          class="site-footer-socials flex gap-1 font-20"
         >
-          <BasicButtonIcon
-            class-icon="site-footer-social"
-            icon="twitter"
-            is-brand
-            is-restyled
-            is-secondary
-          />
-
-          <BasicButtonIcon
-            class-icon="site-footer-social fa-brands"
-            icon="facebook-f"
-            is-brand
-            is-restyled
-            is-secondary
-          />
-
-          <BasicButtonIcon
-            class-icon="site-footer-social fa-brands"
-            icon="instagram"
-            is-brand
-            is-restyled
-            is-secondary
-          />
-
-          <BasicButtonIcon
-            class-icon="site-footer-social fa-brands"
-            icon="youtube"
-            is-brand
-            is-restyled
-            is-secondary
-          />
-
-          <BasicButtonIcon
-            class-icon="site-footer-social fa-brands"
-            icon="pinterest-p"
-            is-brand
-            is-restyled
-            is-secondary
-          />
-
-          <BasicButtonIcon
-            class-icon="site-footer-social fa-brands"
-            icon="linkedin-in"
-            is-brand
-            is-restyled
-            is-secondary
+          <BasicLinkAsButtonIcon
+            :icon="socialLink.icon"
+            :key="socialLink.url"
+            :to="socialLink.url"
+            class="tertiary"
+            target="_blank"
+            v-for="socialLink in socialLinks"
           />
         </div>
       </BasicContainer>
     </div>
 
-    <div class="py-2 bg-gray-light">
+    <div class="py-2 bg-beige">
       <BasicContainer
         :class="isExtraSmall ? 'column axis2-center' : 'row'"
         class="flex wrap gap-1"
@@ -284,11 +284,5 @@
 
   .order-2 {
     order: 2;
-  }
-</style>
-
-<style>
-  .site-footer-social {
-    width: 2rem;
   }
 </style>

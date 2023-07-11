@@ -2,6 +2,7 @@
   import { onMounted, ref } from 'vue';
 
   import BasicButton from '@/components/BasicButton.vue';
+  import { ICONS } from '@/types/Icon';
 
   const props = defineProps({
     classLabel: {
@@ -46,10 +47,10 @@
 </script>
 
 <template>
-  <div class="site-read-more flex column gap-1">
+  <div class="read-more flex column gap-1">
     <div
       ref="readMoreContent"
-      class="site-read-more-content grid"
+      class="read-more-content grid"
     >
       <div
         :style="{ minHeight: props.heightCollapsed }"
@@ -61,11 +62,10 @@
 
     <div>
       <BasicButton
-        :icon-trailing="isExpanded ? 'chevron-up' : 'chevron-down'"
-        :is-restyled="true"
+        :icon-trailing="isExpanded ? ICONS.CHEVRON_UP : ICONS.CHEVRON_DOWN"
         @click="toggleIsExpanded"
         class="flex axis2-center gap-1/4 font-700"
-        is-solid
+        is-restyled
       >
         <span class="underline">{{ isExpanded ? props.labelExpanded : props.labelCollapsed }}</span>
       </BasicButton>
@@ -74,7 +74,7 @@
 </template>
 
 <style scoped>
-  .site-read-more-content {
+  .read-more-content {
     transition: grid-template-rows var(--animate);
   }
 </style>
