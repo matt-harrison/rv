@@ -1,5 +1,5 @@
 import vue from '@vitejs/plugin-vue';
-import { defineConfig } from 'vite';
+import { configDefaults, defineConfig } from 'vitest/config';
 import { fileURLToPath, URL } from 'node:url';
 import { resolve } from 'path';
 
@@ -42,5 +42,11 @@ export default defineConfig({
         ws: true,
       },
     },
+  },
+  test: {
+    environment: 'jsdom',
+    exclude: [...configDefaults.exclude, 'e2e/*'],
+    globals: true,
+    root: fileURLToPath(new URL('./', import.meta.url)),
   },
 });

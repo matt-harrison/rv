@@ -256,8 +256,6 @@
 
   const toggleIsDarkTheme = () => {
     isDarkTheme.value = !isDarkTheme.value;
-
-    setSwatches();
   };
 
   const openModal = () => {
